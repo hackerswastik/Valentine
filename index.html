@@ -92,6 +92,51 @@
             font-weight: 400;
         }
 
+        /* New styles for enhancements */
+        .time-greeting {
+            font-size: 1.2rem;
+            color: #e84393;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+
+        #typewriterText {
+            border-right: 2px solid #e84393;
+            animation: blink 1.2s infinite;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: #e84393; }
+            51%, 100% { border-color: transparent; }
+        }
+
+        /* Heart confetti styles */
+        .heart-confetti {
+            position: absolute;
+            font-size: 16px;
+            color: #e84393;
+            pointer-events: none;
+            animation: heartConfetti 3s ease-out forwards;
+            z-index: 1000;
+        }
+
+        @keyframes heartConfetti {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
         .love-message .heart-emoji {
             display: inline-block;
             animation: heartbeat 1.5s ease-in-out infinite;
@@ -275,11 +320,10 @@
     <div class="heart" style="left: 90%; animation-delay: -8s;">💖</div>
 
     <div class="container">
-        <div class="love-message">
+        <div class="time-greeting" id="timeGreeting"></div>
+        <div class="love-message" id="loveMessage">
             Dear Nivedita,<br>
-            In a world full of ordinary moments,<br>
-            you make everything feel like magic <span class="heart-emoji">✨</span><br>
-            Every heartbeat whispers your name <span class="heart-emoji">💕</span>
+            <span id="typewriterText"></span>
         </div>
 
         <div class="question">
@@ -369,6 +413,27 @@
             }
         }
 
+        // Function to create heart confetti
+        function createHeartConfetti() {
+            const hearts = ['💕', '❤️', '💖', '💗', '💓'];
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heartConfetti = document.createElement('div');
+                    heartConfetti.className = 'heart-confetti';
+                    heartConfetti.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                    heartConfetti.style.left = Math.random() * 100 + 'vw';
+                    heartConfetti.style.animationDelay = Math.random() * 1 + 's';
+                    heartConfetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(heartConfetti);
+                    
+                    // Remove heart confetti after animation
+                    setTimeout(() => {
+                        heartConfetti.remove();
+                    }, 5000);
+                }, i * 100);
+            }
+        }
+
         // Event listeners
         noBtn.addEventListener('mouseenter', moveNoButton);
         noBtn.addEventListener('click', (e) => {
@@ -388,6 +453,7 @@
                 buttonsContainer.style.display = 'none';
                 successMessage.classList.add('show');
                 createConfetti();
+                createHeartConfetti(); // Add heart confetti animation
             }, 300);
         });
 
@@ -427,6 +493,57 @@
             }
         `;
         document.head.appendChild(style);
+
+        // Time-based greeting function
+        function setTimeGreeting() {
+            const now = new Date();
+            const hour = now.getHours();
+            const greetingEl = document.getElementById('timeGreeting');
+            
+            let greeting = '';
+            if (hour < 12) {
+                greeting = '🌅 Good morning, beautiful soul';
+            } else if (hour < 17) {
+                greeting = '☀️ Good afternoon, my sunshine';  
+            } else {
+                greeting = '🌙 Good evening, my star';
+            }
+            
+            greetingEl.textContent = greeting;
+        }
+
+        // Typewriter effect function
+        function typeWriter() {
+            const text = 'In a world full of ordinary moments,\nyou make everything feel like magic ✨\nEvery heartbeat whispers your name 💕';
+            const typewriterEl = document.getElementById('typewriterText');
+            let i = 0;
+            
+            function type() {
+                if (i < text.length) {
+                    if (text.charAt(i) === '\n') {
+                        typewriterEl.innerHTML += '<br>';
+                    } else {
+                        typewriterEl.innerHTML += text.charAt(i);
+                    }
+                    i++;
+                    setTimeout(type, 80);
+                } else {
+                    // Remove cursor after typing is complete
+                    setTimeout(() => {
+                        typewriterEl.style.borderRight = 'none';
+                    }, 1000);
+                }
+            }
+            
+            // Start typing after a short delay
+            setTimeout(type, 1500);
+        }
+
+        // Initialize enhancements when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeGreeting();
+            typeWriter();
+        });
     </script>
 </body>
 </html>
