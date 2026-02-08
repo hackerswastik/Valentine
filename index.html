@@ -137,6 +137,146 @@
             }
         }
 
+        /* Photo gallery styles */
+        .photo-gallery {
+            display: none;
+            margin: 2rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .photo-gallery.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .photo-slideshow {
+            position: relative;
+            width: 200px;
+            height: 240px;
+            margin: 0 auto 1rem;
+            cursor: pointer;
+        }
+
+        .photo-frame {
+            position: absolute;
+            width: 100%;
+            height: 200px;
+            background: white;
+            padding: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .photo-frame.active {
+            opacity: 1;
+            transform: rotate(-2deg) scale(1);
+        }
+
+        .photo-frame:nth-child(even) {
+            transform: rotate(1.5deg);
+        }
+
+        .photo-frame:nth-child(3n) {
+            transform: rotate(-1deg);
+        }
+
+        .photo-frame:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .photo-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #e84393;
+            font-weight: 500;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* Hidden romantic message */
+        .hidden-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .hidden-message.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .hidden-message-text {
+            color: #2d3436;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .close-message {
+            background: #e84393;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .close-message:hover {
+            background: #d63384;
+            transform: scale(1.05);
+        }
+
+        /* Countdown timer */
+        .countdown-timer {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(232, 67, 147, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(232, 67, 147, 0.2);
+        }
+
+        .countdown-label {
+            color: #e84393;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .countdown-time {
+            color: #2d3436;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+        }
+
         .love-message .heart-emoji {
             display: inline-block;
             animation: heartbeat 1.5s ease-in-out infinite;
@@ -341,10 +481,53 @@
 
         <div class="success-message" id="successMessage">
             <div class="success-title">You've made me the happiest! 🥰</div>
+            
+            <div class="photo-gallery" id="photoGallery">
+                <div class="photo-slideshow" id="photoSlideshow">
+                    <div class="photo-frame active">
+                        <img src="images/memory1.jpeg" alt="Beautiful memory">
+                    </div>
+                    <div class="photo-frame">
+                        <img src="images/memory2.jpeg" alt="Sweet moment">
+                    </div>
+                    <div class="photo-frame">
+                        <img src="images/memory3.jpeg" alt="Lovely time">
+                    </div>
+                    <div class="photo-frame">
+                        <img src="images/memory4.jpeg" alt="Perfect day">
+                    </div>
+                    <div class="photo-frame">
+                        <img src="images/memory5.jpeg" alt="Happy memories">
+                    </div>
+                    <div class="photo-frame">
+                        <img src="images/memory6.jpeg" alt="Sweet memories">
+                    </div>
+                    <div class="photo-frame">
+                        <img src="images/memory7.jpeg" alt="Beautiful moments">
+                    </div>
+                </div>
+                <div class="photo-caption" id="photoCaption">My favorite smile ✨</div>
+            </div>
+            
             <div class="location-info">Meet me at:</div>
             <div class="location-info">22nd Floor</div>
             <div class="location-info">C 2205 / 2206</div>
             <div class="love-declaration">I Love You ❤️</div>
+            
+            <div class="countdown-timer">
+                <div class="countdown-label">Counting seconds until I see you</div>
+                <div class="countdown-time" id="countdownTime">00:00:00</div>
+            </div>
+        </div>
+
+        <!-- Hidden romantic message -->
+        <div class="hidden-message" id="hiddenMessage">
+            <div class="hidden-message-text">
+                Every photo tells our story...<br>
+                Every moment with you is a treasure 💝<br>
+                Can't wait to create more memories together
+            </div>
+            <button class="close-message" onclick="closeHiddenMessage()">Close 💕</button>
         </div>
     </div>
 
@@ -543,6 +726,142 @@
         document.addEventListener('DOMContentLoaded', () => {
             setTimeGreeting();
             typeWriter();
+            startCountdown();
+        });
+
+        // Photo slideshow functionality
+        let currentPhotoIndex = 0;
+        let slideshowInterval;
+        let isPaused = false;
+
+        const photoCaptions = [
+            "My favorite smile ✨",
+            "This moment means everything to me 💕",
+            "When you laugh, my world lights up 🌟",
+            "Perfect memories with my perfect person 💖",
+            "Every second with you is precious ⏰"
+        ];
+
+        function startPhotoSlideshow() {
+            const frames = document.querySelectorAll('.photo-frame');
+            const captionEl = document.getElementById('photoCaption');
+            
+            slideshowInterval = setInterval(() => {
+                if (!isPaused) {
+                    // Fade out current photo
+                    frames[currentPhotoIndex].classList.remove('active');
+                    
+                    // Move to next photo
+                    currentPhotoIndex = (currentPhotoIndex + 1) % frames.length;
+                    
+                    // Fade in next photo
+                    setTimeout(() => {
+                        frames[currentPhotoIndex].classList.add('active');
+                        captionEl.textContent = photoCaptions[currentPhotoIndex];
+                    }, 300);
+                }
+            }, 2500);
+        }
+
+        // Mobile vibration function
+        function vibrateOnMobile() {
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200]);
+            }
+        }
+
+        // Hidden message functionality
+        function showHiddenMessage() {
+            const hiddenMessage = document.getElementById('hiddenMessage');
+            hiddenMessage.classList.add('show');
+        }
+
+        function closeHiddenMessage() {
+            const hiddenMessage = document.getElementById('hiddenMessage');
+            hiddenMessage.classList.remove('show');
+        }
+
+        // Countdown timer functionality
+        function startCountdown() {
+            const countdownEl = document.getElementById('countdownTime');
+            let seconds = 0;
+            
+            const countdownInterval = setInterval(() => {
+                seconds++;
+                const hours = Math.floor(seconds / 3600).toString().padStart(2, '0');
+                const minutes = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+                const secs = (seconds % 60).toString().padStart(2, '0');
+                
+                if (countdownEl) {
+                    countdownEl.textContent = `${hours}:${minutes}:${secs}`;
+                }
+            }, 1000);
+        }
+
+        // Enhanced Yes button click handler
+        const originalYesHandler = yesBtn.onclick;
+        yesBtn.addEventListener('click', () => {
+            // Vibrate on mobile
+            vibrateOnMobile();
+            
+            // Hide buttons with animation
+            buttonsContainer.style.opacity = '0';
+            buttonsContainer.style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                buttonsContainer.style.display = 'none';
+                successMessage.classList.add('show');
+                
+                // Show photo gallery with delay
+                setTimeout(() => {
+                    const photoGallery = document.getElementById('photoGallery');
+                    photoGallery.classList.add('show');
+                    startPhotoSlideshow();
+                }, 800);
+                
+                createConfetti();
+                createHeartConfetti();
+            }, 300);
+        });
+
+        // Add click handlers for hearts and photos to show hidden message
+        document.addEventListener('click', (e) => {
+            const clickedElement = e.target;
+            
+            // Check if clicked on heart emoji or photo
+            if (clickedElement.textContent.includes('💕') || 
+                clickedElement.textContent.includes('❤️') || 
+                clickedElement.textContent.includes('💖') ||
+                clickedElement.tagName === 'IMG' ||
+                clickedElement.classList.contains('photo-frame')) {
+                showHiddenMessage();
+            }
+        });
+
+        // Pause slideshow on hover/touch
+        document.addEventListener('DOMContentLoaded', () => {
+            const photoSlideshow = document.getElementById('photoSlideshow');
+            
+            if (photoSlideshow) {
+                photoSlideshow.addEventListener('mouseenter', () => {
+                    isPaused = true;
+                });
+                
+                photoSlideshow.addEventListener('mouseleave', () => {
+                    isPaused = false;
+                });
+                
+                // Touch events for mobile
+                photoSlideshow.addEventListener('touchstart', () => {
+                    isPaused = true;
+                });
+                
+                photoSlideshow.addEventListener('touchend', () => {
+                    setTimeout(() => {
+                        isPaused = false;
+                    }, 1000);
+                });
+            }
         });
     </script>
 </body>
