@@ -374,6 +374,126 @@
             }
         }
 
+        /* Chocolate Day Banner */
+        .chocolate-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #8B4513, #A0522D, #D2691E);
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+            z-index: 5000;
+            font-family: 'Georgia', serif;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: bannerSlideIn 1s ease-out 0.5s forwards;
+        }
+
+        .chocolate-banner-main {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .chocolate-banner-sub {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        @keyframes bannerSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Chocolate floating animation */
+        .chocolate-float {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.7;
+            pointer-events: none;
+            animation: chocolateFloat 4s ease-in-out infinite;
+            z-index: 999;
+        }
+
+        @keyframes chocolateFloat {
+            0%, 100% { 
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            50% { 
+                transform: translateY(-50px) rotate(180deg);
+                opacity: 0.5;
+            }
+        }
+
+        /* Chocolate Day message styles */
+        .chocolate-message {
+            color: #8B4513;
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            font-weight: 500;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInChocolate 0.8s ease-out 1s forwards;
+        }
+
+        @keyframes fadeInChocolate {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Enhanced Yes button with chocolate theme */
+        .btn-yes {
+            background: linear-gradient(45deg, #8B4513, #A0522D, #D2691E) !important;
+            color: white;
+            box-shadow: 0 8px 15px rgba(139, 69, 19, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-yes::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-yes:hover::before {
+            left: 100%;
+        }
+
+        .btn-yes:hover {
+            background: linear-gradient(45deg, #A0522D, #D2691E, #CD853F) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(139, 69, 19, 0.4);
+        }
+
+        /* Body margin adjustment for banner */
+        body {
+            margin-top: 60px;
+        }
+
         /* Mobile responsiveness */
         @media (max-width: 480px) {
             .container {
@@ -399,10 +519,32 @@
                 flex-direction: column;
                 align-items: center;
             }
+
+            .chocolate-banner {
+                padding: 0.4rem;
+            }
+
+            .chocolate-banner-main {
+                font-size: 0.9rem;
+            }
+
+            .chocolate-banner-sub {
+                font-size: 0.7rem;
+            }
+
+            body {
+                margin-top: 50px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Chocolate Day Banner -->
+    <div class="chocolate-banner">
+        <div class="chocolate-banner-main">🍫 Happy Chocolate Day 🍫</div>
+        <div class="chocolate-banner-sub">Because life is sweeter with you</div>
+    </div>
+
     <!-- Floating hearts background -->
     <div class="heart" style="left: 10%; animation-delay: 0s;">💕</div>
     <div class="heart" style="left: 20%; animation-delay: -1s;">❤️</div>
@@ -437,6 +579,10 @@
         <div class="success-message" id="successMessage">
             <div class="success-title">You've made me the happiest! 🥰</div>
             
+            <!-- Chocolate Day Messages -->
+            <div class="chocolate-message">Your chocolate is waiting 🍫😋</div>
+            <div class="chocolate-message" style="animation-delay: 1.5s;">You're getting real chocolates today 😉</div>
+            
             <div class="photo-gallery" id="photoGallery">
                 <div class="photo-slideshow" id="photoSlideshow">
                     <div class="photo-frame active">
@@ -468,6 +614,7 @@
             <div class="location-info">22nd Floor</div>
             <div class="location-info">C 2205 / 2206</div>
             <div class="love-declaration">I Love You ❤️</div>
+            <div class="love-declaration" style="font-size: 1.2rem; margin-top: 0.5rem;">Chocolate included 🍫❤️</div>
             
             <div class="countdown-timer">
                 <div class="countdown-label">Counting seconds until I see you</div>
@@ -561,6 +708,27 @@
                         heartConfetti.remove();
                     }, 5000);
                 }, i * 100);
+            }
+        }
+
+        // Function to create floating chocolate animation
+        function createChocolateFloat() {
+            const chocolates = ['🍫', '🍫', '🍫'];
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const chocolate = document.createElement('div');
+                    chocolate.className = 'chocolate-float';
+                    chocolate.innerHTML = chocolates[Math.floor(Math.random() * chocolates.length)];
+                    chocolate.style.left = Math.random() * 100 + 'vw';
+                    chocolate.style.animationDelay = Math.random() * 2 + 's';
+                    chocolate.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    document.body.appendChild(chocolate);
+                    
+                    // Remove chocolate after animation
+                    setTimeout(() => {
+                        chocolate.remove();
+                    }, 6000);
+                }, i * 150);
             }
         }
 
@@ -761,6 +929,7 @@
                 
                 createConfetti();
                 createHeartConfetti();
+                createChocolateFloat(); // Add chocolate floating animation
             }, 300);
         });
 
