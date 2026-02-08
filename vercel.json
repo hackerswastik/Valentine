@@ -1,6 +1,20 @@
 {
+  "version": 2,
   "public": true,
-  "buildCommand": null,
-  "devCommand": null,
-  "installCommand": null
+  "builds": [
+    {
+      "src": "**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/images/(.*)",
+      "dest": "/images/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
 }
