@@ -207,52 +207,7 @@
             font-style: italic;
         }
 
-        /* Hidden romantic message */
-        .hidden-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            z-index: 10000;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-            max-width: 300px;
-            text-align: center;
-        }
 
-        .hidden-message.show {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .hidden-message-text {
-            color: #2d3436;
-            font-size: 1.1rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-
-        .close-message {
-            background: #e84393;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .close-message:hover {
-            background: #d63384;
-            transform: scale(1.05);
-        }
 
         /* Countdown timer */
         .countdown-timer {
@@ -520,15 +475,7 @@
             </div>
         </div>
 
-        <!-- Hidden romantic message -->
-        <div class="hidden-message" id="hiddenMessage">
-            <div class="hidden-message-text">
-                Every photo tells our story...<br>
-                Every moment with you is a treasure 💝<br>
-                Can't wait to create more memories together
-            </div>
-            <button class="close-message" onclick="closeHiddenMessage()">Close 💕</button>
-        </div>
+
     </div>
 
     <script>
@@ -739,7 +686,9 @@
             "This moment means everything to me 💕",
             "When you laugh, my world lights up 🌟",
             "Perfect memories with my perfect person 💖",
-            "Every second with you is precious ⏰"
+            "Every second with you is precious ⏰",
+            "Sweet memories we've made together 💝",
+            "Beautiful moments that make my heart flutter 💓"
         ];
 
         function startPhotoSlideshow() {
@@ -770,16 +719,7 @@
             }
         }
 
-        // Hidden message functionality
-        function showHiddenMessage() {
-            const hiddenMessage = document.getElementById('hiddenMessage');
-            hiddenMessage.classList.add('show');
-        }
 
-        function closeHiddenMessage() {
-            const hiddenMessage = document.getElementById('hiddenMessage');
-            hiddenMessage.classList.remove('show');
-        }
 
         // Countdown timer functionality
         function startCountdown() {
@@ -824,19 +764,7 @@
             }, 300);
         });
 
-        // Add click handlers for hearts and photos to show hidden message
-        document.addEventListener('click', (e) => {
-            const clickedElement = e.target;
-            
-            // Check if clicked on heart emoji or photo
-            if (clickedElement.textContent.includes('💕') || 
-                clickedElement.textContent.includes('❤️') || 
-                clickedElement.textContent.includes('💖') ||
-                clickedElement.tagName === 'IMG' ||
-                clickedElement.classList.contains('photo-frame')) {
-                showHiddenMessage();
-            }
-        });
+
 
         // Pause slideshow on hover/touch
         document.addEventListener('DOMContentLoaded', () => {
