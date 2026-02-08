@@ -637,8 +637,157 @@
 
         .loading-animation {
             text-align: center;
-            font-size: 2rem;
-            color: #D2691E;
+            margin-bottom: 2rem;
+        }
+
+        /* Chocolate melting animation */
+        .chocolate-loader {
+            position: relative;
+            width: 120px;
+            height: 80px;
+            margin: 0 auto 2rem;
+        }
+
+        .chocolate-bar {
+            width: 100px;
+            height: 60px;
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            border-radius: 8px;
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(139, 69, 19, 0.3);
+            animation: meltChocolate 2s ease-in-out infinite;
+        }
+
+        .chocolate-bar::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #654321;
+            border-radius: 2px;
+            top: 10px;
+            left: 15px;
+            box-shadow: 
+                25px 0 #654321,
+                50px 0 #654321,
+                0 20px #654321,
+                25px 20px #654321,
+                50px 20px #654321;
+        }
+
+        .melting-drops {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 20px;
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            border-radius: 0 0 30px 30px;
+            opacity: 0;
+            animation: meltingDrops 2s ease-in-out infinite;
+        }
+
+        @keyframes meltChocolate {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.05) rotate(-1deg); }
+            50% { transform: scale(1.1) rotate(1deg); }
+            75% { transform: scale(1.05) rotate(-0.5deg); }
+        }
+
+        @keyframes meltingDrops {
+            0%, 30% { opacity: 0; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.7; transform: translateX(-50%) translateY(10px); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+        }
+
+        /* Stirring bowl animation */
+        .stirring-bowl {
+            width: 100px;
+            height: 60px;
+            background: linear-gradient(180deg, #D2691E, #8B4513);
+            border-radius: 0 0 50px 50px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .spoon {
+            position: absolute;
+            width: 4px;
+            height: 40px;
+            background: #C0C0C0;
+            top: -15px;
+            left: 50%;
+            transform-origin: bottom center;
+            animation: stirSpoon 1.5s ease-in-out infinite;
+            border-radius: 2px;
+        }
+
+        .spoon::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 8px;
+            background: #C0C0C0;
+            border-radius: 50%;
+            top: -4px;
+            left: -4px;
+        }
+
+        @keyframes stirSpoon {
+            0%, 100% { transform: translateX(-50%) rotate(-20deg); }
+            50% { transform: translateX(-50%) rotate(20deg); }
+        }
+
+        /* Chocolate progress bar */
+        .chocolate-progress {
+            width: 200px;
+            height: 20px;
+            background: rgba(139, 69, 19, 0.2);
+            border-radius: 10px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid #8B4513;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8B4513, #D2691E, #8B4513);
+            border-radius: 8px;
+            width: 0%;
+            animation: fillProgress 2.5s ease-in-out infinite;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '🍫';
+            position: absolute;
+            right: -15px;
+            top: -8px;
+            font-size: 16px;
+            animation: bounce 0.6s ease-in-out infinite alternate;
+        }
+
+        @keyframes fillProgress {
+            0% { width: 0%; }
+            70% { width: 100%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-5px); }
+        }
+
+        /* Animated loading text */
+        .loading-text {
+            font-size: 1.4rem;
+            color: #8B4513;
+            font-weight: 500;
+            text-align: center;
         }
 
         .dot {
@@ -761,6 +910,62 @@
             .option-emoji {
                 min-width: auto;
             }
+
+            .chocolate-loader {
+                width: 100px;
+                height: 70px;
+            }
+
+            .chocolate-bar {
+                width: 80px;
+                height: 50px;
+            }
+
+            .chocolate-bar::before {
+                width: 15px;
+                height: 15px;
+                top: 8px;
+                left: 12px;
+                box-shadow: 
+                    20px 0 #654321,
+                    40px 0 #654321,
+                    0 18px #654321,
+                    20px 18px #654321,
+                    40px 18px #654321;
+            }
+
+            .chocolate-progress {
+                width: 160px;
+                height: 16px;
+            }
+
+            .progress-fill::after {
+                font-size: 14px;
+                right: -12px;
+                top: -6px;
+            }
+
+            .loading-text {
+                font-size: 1.2rem;
+            }
+
+            .stirring-bowl {
+                width: 80px;
+                height: 50px;
+            }
+
+            .spoon {
+                width: 3px;
+                height: 32px;
+                top: -12px;
+            }
+
+            .spoon::before {
+                width: 10px;
+                height: 6px;
+                left: -3px;
+                top: -3px;
+            }
         }
     </style>
 </head>
@@ -879,11 +1084,28 @@
 
         <!-- Loading Screen -->
         <div class="game-screen" id="loadingScreen">
-            <div class="loading-title">Preparing your chocolate… 🍫</div>
-            <div class="loading-animation">
-                <span class="dot">.</span>
-                <span class="dot">.</span>
-                <span class="dot">.</span>
+            <div class="loading-title">Preparing your custom chocolate</div>
+            
+            <!-- Chocolate melting animation -->
+            <div class="chocolate-loader">
+                <div class="chocolate-bar">
+                    <div class="melting-drops"></div>
+                </div>
+            </div>
+            
+            <!-- Alternative stirring bowl animation -->
+            <div class="stirring-bowl" style="display: none;">
+                <div class="spoon"></div>
+            </div>
+            
+            <!-- Chocolate progress bar -->
+            <div class="chocolate-progress">
+                <div class="progress-fill"></div>
+            </div>
+            
+            <!-- Animated loading text -->
+            <div class="loading-text">
+                Almost ready<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
             </div>
         </div>
 
@@ -983,11 +1205,24 @@
         function prepareChocolate() {
             showScreen('loadingScreen');
             
-            // Simulate preparation time
+            // Add some variety to the loading animations
+            const chocolateLoader = document.querySelector('.chocolate-loader');
+            const stirringBowl = document.querySelector('.stirring-bowl');
+            
+            // Randomly choose animation style
+            if (Math.random() > 0.5) {
+                chocolateLoader.style.display = 'block';
+                stirringBowl.style.display = 'none';
+            } else {
+                chocolateLoader.style.display = 'none';
+                stirringBowl.style.display = 'block';
+            }
+            
+            // Simulate preparation time with cute loading
             setTimeout(() => {
                 showScreen('finalScreen');
                 createChocolateFloat(); // Final celebration
-            }, 3000);
+            }, 3000); // Extended to 3 seconds for better loading experience
         }
 
         // Function to create floating chocolate animation
