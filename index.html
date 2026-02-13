@@ -904,9 +904,8 @@
             transform-origin: top center;
             position: relative;
             min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: block !important;
+            overflow: hidden;
         }
 
         .photo-frame::before {
@@ -940,13 +939,15 @@
         }
 
         .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 2px;
-            display: block;
-            position: relative;
-            z-index: 2;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 2px !important;
+            display: block !important;
+            position: relative !important;
+            z-index: 3 !important;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
         /* Placeholder for failed images */
@@ -1480,13 +1481,13 @@
         };
 
         const memoryPhotos = [
-            { src: '/images/memory1.jpeg?v=2', caption: 'Every moment we share becomes precious to me ❤️' },
-            { src: '/images/memory2.jpeg?v=2', caption: 'Your laugh makes everything brighter 🌟' },
-            { src: '/images/memory3.jpeg?v=2', caption: 'Simple moments with you feel magical ✨' },
-            { src: '/images/memory4.jpeg?v=2', caption: 'You bring color to my world 🌈' },
-            { src: '/images/memory5.jpeg?v=2', caption: 'Being with you feels like home 🏠' },
-            { src: '/images/memory6.jpeg?v=2', caption: 'These memories are my favorite treasures 💎' },
-            { src: '/images/memory7.jpeg?v=2', caption: 'With you, ordinary becomes extraordinary 💕' }
+            { src: '/images/memory1.jpeg', caption: 'Every moment we share becomes precious to me ❤️' },
+            { src: '/images/memory2.jpeg', caption: 'Your laugh makes everything brighter 🌟' },
+            { src: '/images/memory3.jpeg', caption: 'Simple moments with you feel magical ✨' },
+            { src: '/images/memory4.jpeg', caption: 'You bring color to my world 🌈' },
+            { src: '/images/memory5.jpeg', caption: 'Being with you feels like home 🏠' },
+            { src: '/images/memory6.jpeg', caption: 'These memories are my favorite treasures 💎' },
+            { src: '/images/memory7.jpeg', caption: 'With you, ordinary becomes extraordinary 💕' }
         ];
 
         function initializeMemoryWall() {
@@ -1496,12 +1497,16 @@
             container.innerHTML = '';
             progressTotal.textContent = memoryWallState.totalPhotos;
             
+            // Debug: Log that we're initializing
+            console.log('🎬 Initializing Memory Wall...');
+            
             // Create floating particles
             createFloatingParticles();
             
             // Add photos with staggered animation
             memoryPhotos.forEach((photo, index) => {
                 setTimeout(() => {
+                    console.log(`📸 Creating photo ${index + 1}: ${photo.src}`);
                     createHangingPhoto(photo, index);
                 }, index * 800);
             });
@@ -1527,13 +1532,60 @@
             photoElement.style.left = leftPosition + '%';
             photoElement.style.top = topPosition + 'px';
             
-            photoElement.innerHTML = `
-                <div class="photo-thread" style="height: ${threadLength}px;"></div>
-                <div class="photo-frame" onclick="clickPhoto(${index})" style="animation: ${swingAnimation} ${4 + Math.random() * 2}s ease-in-out infinite;">
-                    <img src="${photo.src}" alt="Memory ${index + 1}" loading="eager" onload="console.log('Image loaded: ${photo.src}')" onerror="this.style.display='none'; const placeholder = document.createElement('div'); placeholder.className='photo-placeholder'; placeholder.innerHTML='📷'; this.parentNode.appendChild(placeholder); console.error('Failed to load: ${photo.src}');">
-                </div>
-            `;
+            // Create the frame and image elements
+            const threadDiv = document.createElement('div');
+            threadDiv.className = 'photo-thread';
+            threadDiv.style.height = threadLength + 'px';
             
+            const frameDiv = document.createElement('div');
+            frameDiv.className = 'photo-frame';
+            frameDiv.style.animation = `${swingAnimation} ${4 + Math.random() * 2}s ease-in-out infinite`;
+            frameDiv.onclick = () => clickPhoto(index);
+            
+            const img = document.createElement('img');
+            img.src = photo.src;
+            img.alt = `Memory ${index + 1}`;
+            img.loading = 'eager';
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'cover';
+            img.style.borderRadius = '2px';
+            img.style.display = 'block';
+            img.style.position = 'relative';
+            img.style.zIndex = '3';
+            
+            // Better error and success handling
+            img.onload = function() {
+                console.log(`✅ Image loaded successfully: ${photo.src}`);
+                this.style.opacity = '1';
+            };
+            
+            img.onerror = function() {
+                console.error(`❌ Failed to load: ${photo.src}`);
+                // Create placeholder
+                const placeholder = document.createElement('div');
+                placeholder.innerHTML = '📷';
+                placeholder.style.cssText = `
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 24px;
+                    color: #666;
+                    background: #f0f0f0;
+                    border-radius: 2px;
+                    position: relative;
+                    z-index: 3;
+                `;
+                frameDiv.appendChild(placeholder);
+                this.style.display = 'none';
+            };
+            
+            // Assemble the elements
+            frameDiv.appendChild(img);
+            photoElement.appendChild(threadDiv);
+            photoElement.appendChild(frameDiv);
             container.appendChild(photoElement);
             
             // Staggered animation with more delay
