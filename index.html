@@ -374,13 +374,13 @@
             }
         }
 
-        /* Chocolate Day Banner */
+        /* Valentine's Day Banner */
         .chocolate-banner {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(90deg, #8B4513, #A0522D, #D2691E);
+            background: linear-gradient(90deg, #e84393, #fd79a8, #ff7675);
             color: white;
             text-align: center;
             padding: 0.5rem;
@@ -895,10 +895,10 @@
     </style>
 </head>
 <body>
-    <!-- Chocolate Day Banner -->
+    <!-- Valentine's Day Banner -->
     <div class="chocolate-banner">
-        <div class="chocolate-banner-main">🍫 Happy Chocolate Day 🍫</div>
-        <div class="chocolate-banner-sub">Because life is sweeter with you</div>
+        <div class="chocolate-banner-main">💕 Happy Valentine's Day 💕</div>
+        <div class="chocolate-banner-sub">You make my world beautiful</div>
     </div>
 
     <!-- Floating hearts background -->
@@ -1209,153 +1209,6 @@
                 setTimeout(() => sparkle.remove(), 1000);
             }
         });
-    </script>
-            
-            const responses = {
-                'calm': "Perfect... I love how peaceful and centered you are. 🌙",
-                'bright': "Yes! Your energy lights up every room you enter. ✨",
-                'magical': "I knew it... there's something truly enchanting about you. 🌟",
-                'exciting': "Absolutely! Life is always an adventure with you. 🎉"
-            };
-            
-            const responseEl = document.getElementById('vibe-response');
-            responseEl.textContent = responses[vibe];
-            responseEl.classList.add('show');
-            
-            setTimeout(() => {
-                document.getElementById('vibe-next').style.display = 'block';
-                document.getElementById('vibe-next').style.opacity = '1';
-            }, 1500);
-        }
-        
-        function proceedToLove() {
-            switchScreen('vibe-choice', 'personal-touch');
-            currentScreen = 'personal-touch';
-        }
-        
-        function selectLove(love, loveText) {
-            gameState.selectedLove = love;
-            
-            setTimeout(() => {
-                document.getElementById('love-next').style.display = 'block';
-                document.getElementById('love-next').style.opacity = '1';
-            }, 800);
-        }
-        
-        function startBuildUp() {
-            switchScreen('personal-touch', 'emotional-buildup');
-            currentScreen = 'emotional-buildup';
-            
-            // Start typing animation
-            setTimeout(() => {
-                typeMessage();
-            }, 1000);
-        }
-        
-        function typeMessage() {
-            const lines = [
-                "You know what I realized?",
-                "All these little moments we've shared...",
-                "They've been building up to something.",
-                "Something I want to tell you in person.",
-                "Will you meet me?"
-            ];
-            
-            const typingContainer = document.querySelector('.typing-container');
-            let currentLine = 0;
-            
-            function typeLine() {
-                if (currentLine >= lines.length) {
-                    setTimeout(() => {
-                        document.getElementById('buildup-next').style.display = 'block';
-                        document.getElementById('buildup-next').style.opacity = '1';
-                    }, 1000);
-                    return;
-                }
-                
-                const lineElement = document.createElement('div');
-                lineElement.className = 'typing-line';
-                lineElement.style.opacity = '1';
-                typingContainer.appendChild(lineElement);
-                
-                const text = lines[currentLine];
-                let charIndex = 0;
-                
-                const typeInterval = setInterval(() => {
-                    lineElement.textContent = text.substring(0, charIndex + 1);
-                    lineElement.style.width = (charIndex + 1) + 'ch';
-                    charIndex++;
-                    
-                    if (charIndex >= text.length) {
-                        clearInterval(typeInterval);
-                        lineElement.style.borderRight = 'none';
-                        currentLine++;
-                        setTimeout(() => {
-                            typeLine();
-                        }, 800);
-                    }
-                }, 100);
-            }
-            
-            typeLine();
-        }
-        
-        function showFinalReveal() {
-            switchScreen('emotional-buildup', 'final-reveal');
-            currentScreen = 'final-reveal';
-            
-            // Animate final message lines
-            const lines = document.querySelectorAll('.final-line');
-            const location = document.querySelector('.final-location');
-            
-            lines.forEach((line, index) => {
-                setTimeout(() => {
-                    line.classList.add('fade-in');
-                }, index * 1000);
-            });
-            
-            setTimeout(() => {
-                location.classList.add('fade-in');
-            }, lines.length * 1000);
-        }
-        
-        // Add some interactive sparkles on mouse move (keeping original feature)
-        document.addEventListener('mousemove', (e) => {
-            if (Math.random() < 0.03) { // Reduced frequency for cleaner look
-                const sparkle = document.createElement('div');
-                sparkle.innerHTML = '✨';
-                sparkle.style.position = 'absolute';
-                sparkle.style.left = e.clientX + 'px';
-                sparkle.style.top = e.clientY + 'px';
-                sparkle.style.pointerEvents = 'none';
-                sparkle.style.animation = 'sparkle 1s ease-out forwards';
-                sparkle.style.zIndex = '1000';
-                sparkle.style.fontSize = '16px';
-                document.body.appendChild(sparkle);
-                
-                setTimeout(() => sparkle.remove(), 1000);
-            }
-        });
-
-        // Add sparkle animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes sparkle {
-                0% {
-                    transform: scale(0) rotate(0deg);
-                    opacity: 1;
-                }
-                50% {
-                    transform: scale(1) rotate(180deg);
-                    opacity: 0.8;
-                }
-                100% {
-                    transform: scale(0) rotate(360deg);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
