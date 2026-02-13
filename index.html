@@ -494,356 +494,327 @@
             margin-top: 60px;
         }
 
-        /* Game Styles */
-        .game-screen {
+        /* Valentine Experience Styles */
+        .valentine-screen {
             display: none;
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.6s ease-out;
+            transition: all 0.8s ease-out;
         }
 
-        .game-screen.active {
+        .valentine-screen.active {
             display: block;
             opacity: 1;
             transform: translateY(0);
         }
 
-        .game-title {
-            font-size: 2.2rem;
-            color: #8B4513;
-            margin-bottom: 1rem;
+        .opening-title {
+            font-size: 2.5rem;
+            color: #e84393;
+            margin-bottom: 1.5rem;
             font-weight: 700;
             text-align: center;
+            animation: gentleFadeIn 2s ease-out;
         }
 
-        .game-subtitle {
-            font-size: 1.3rem;
-            color: #A0522D;
-            margin-bottom: 0.8rem;
-            font-weight: 500;
+        .opening-subtitle {
+            font-size: 1.2rem;
+            color: #74b9ff;
+            margin-bottom: 3rem;
+            font-weight: 400;
             text-align: center;
-        }
-
-        .game-helper {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 2rem;
             font-style: italic;
-            text-align: center;
+            animation: gentleFadeIn 2s ease-out 0.5s both;
+        }
+
+        @keyframes gentleFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .step-title {
-            font-size: 1.6rem;
-            color: #8B4513;
-            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            color: #e84393;
+            margin-bottom: 2rem;
             font-weight: 600;
             text-align: center;
+            line-height: 1.4;
         }
 
-        .step-subtitle {
-            font-size: 0.9rem;
-            color: #A0522D;
-            margin-bottom: 1rem;
-            font-style: italic;
-            text-align: center;
-        }
-
-        .options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        .question-text {
+            font-size: 1.3rem;
+            color: #74b9ff;
             margin-bottom: 2rem;
-        }
-
-        .option-card {
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid #D2691E;
-            border-radius: 15px;
-            padding: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            text-align: left;
-        }
-
-        .option-card:hover {
-            background: rgba(210, 105, 30, 0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.2);
-        }
-
-        .option-card.selected {
-            background: rgba(210, 105, 30, 0.2);
-            border-color: #8B4513;
-            transform: scale(1.02);
-        }
-
-        .option-emoji {
-            font-size: 2rem;
-            min-width: 50px;
             text-align: center;
-        }
-
-        .option-text {
-            font-size: 1.1rem;
-            color: #2d3436;
             font-weight: 500;
         }
 
-        .cute-response {
-            color: #8B4513;
+        .valentine-btn {
+            background: linear-gradient(45deg, #e84393, #fd79a8);
+            color: white;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 30px;
             font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            margin: 2rem auto;
+            display: block;
+            box-shadow: 0 8px 25px rgba(232, 67, 147, 0.3);
+        }
+
+        .valentine-btn:hover {
+            background: linear-gradient(45deg, #fd79a8, #ff7675);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(232, 67, 147, 0.4);
+        }
+
+        .valentine-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Memory Cards */
+        .memory-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .memory-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #fd79a8;
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .memory-card:hover {
+            background: rgba(253, 121, 168, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(253, 121, 168, 0.2);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            color: #2d3436;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .card-reveal {
+            font-size: 1rem;
+            color: #636e72;
+            text-align: center;
+            line-height: 1.6;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.6s ease;
+            margin-top: 0;
+        }
+
+        .memory-card.revealed .card-title {
+            opacity: 0.7;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .memory-card.revealed .card-reveal {
+            opacity: 1;
+            max-height: 200px;
+            margin-top: 1rem;
+        }
+
+        /* Vibe Options */
+        .vibe-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .vibe-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #74b9ff;
+            border-radius: 20px;
+            padding: 2rem 1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .vibe-card:hover {
+            background: rgba(116, 185, 255, 0.1);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(116, 185, 255, 0.2);
+        }
+
+        .vibe-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .vibe-text {
+            font-size: 1.2rem;
+            color: #2d3436;
+            font-weight: 600;
+        }
+
+        .vibe-response {
+            color: #e84393;
+            font-size: 1.3rem;
             text-align: center;
             font-weight: 600;
             opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.5s ease;
+            transform: translateY(15px);
+            transition: all 0.6s ease;
         }
 
-        .cute-response.show {
+        .vibe-response.show {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .game-btn {
-            background: linear-gradient(45deg, #8B4513, #D2691E);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: 600;
+        /* Love Options */
+        .love-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .love-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #00b894;
+            border-radius: 15px;
+            padding: 2rem 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 1rem auto;
-            display: block;
-        }
-
-        .game-btn:hover {
-            background: linear-gradient(45deg, #A0522D, #CD853F);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.3);
-        }
-
-        .loading-title {
-            font-size: 1.8rem;
-            color: #8B4513;
-            margin-bottom: 2rem;
-            font-weight: 600;
+            transition: all 0.4s ease;
             text-align: center;
         }
 
-        .loading-animation {
-            text-align: center;
-            margin-bottom: 2rem;
+        .love-card:hover {
+            background: rgba(0, 184, 148, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 184, 148, 0.2);
         }
 
-        /* Chocolate melting animation */
-        .chocolate-loader {
-            position: relative;
-            width: 120px;
-            height: 80px;
-            margin: 0 auto 2rem;
-        }
-
-        .chocolate-bar {
-            width: 100px;
-            height: 60px;
-            background: linear-gradient(45deg, #8B4513, #A0522D);
-            border-radius: 8px;
-            position: relative;
-            margin: 0 auto;
-            box-shadow: 0 4px 8px rgba(139, 69, 19, 0.3);
-            animation: meltChocolate 2s ease-in-out infinite;
-        }
-
-        .chocolate-bar::before {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #654321;
-            border-radius: 2px;
-            top: 10px;
-            left: 15px;
-            box-shadow: 
-                25px 0 #654321,
-                50px 0 #654321,
-                0 20px #654321,
-                25px 20px #654321,
-                50px 20px #654321;
-        }
-
-        .melting-drops {
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 20px;
-            background: linear-gradient(45deg, #8B4513, #A0522D);
-            border-radius: 0 0 30px 30px;
-            opacity: 0;
-            animation: meltingDrops 2s ease-in-out infinite;
-        }
-
-        @keyframes meltChocolate {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            25% { transform: scale(1.05) rotate(-1deg); }
-            50% { transform: scale(1.1) rotate(1deg); }
-            75% { transform: scale(1.05) rotate(-0.5deg); }
-        }
-
-        @keyframes meltingDrops {
-            0%, 30% { opacity: 0; transform: translateX(-50%) translateY(0); }
-            50% { opacity: 0.7; transform: translateX(-50%) translateY(10px); }
-            100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-        }
-
-        /* Stirring bowl animation */
-        .stirring-bowl {
-            width: 100px;
-            height: 60px;
-            background: linear-gradient(180deg, #D2691E, #8B4513);
-            border-radius: 0 0 50px 50px;
-            margin: 0 auto;
-            position: relative;
-            box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .spoon {
-            position: absolute;
-            width: 4px;
-            height: 40px;
-            background: #C0C0C0;
-            top: -15px;
-            left: 50%;
-            transform-origin: bottom center;
-            animation: stirSpoon 1.5s ease-in-out infinite;
-            border-radius: 2px;
-        }
-
-        .spoon::before {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 8px;
-            background: #C0C0C0;
-            border-radius: 50%;
-            top: -4px;
-            left: -4px;
-        }
-
-        @keyframes stirSpoon {
-            0%, 100% { transform: translateX(-50%) rotate(-20deg); }
-            50% { transform: translateX(-50%) rotate(20deg); }
-        }
-
-        /* Chocolate progress bar */
-        .chocolate-progress {
-            width: 200px;
-            height: 20px;
-            background: rgba(139, 69, 19, 0.2);
-            border-radius: 10px;
-            margin: 0 auto;
-            overflow: hidden;
-            position: relative;
-            border: 2px solid #8B4513;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #8B4513, #D2691E, #8B4513);
-            border-radius: 8px;
-            width: 0%;
-            animation: fillProgress 2.5s ease-in-out infinite;
-            position: relative;
-        }
-
-        .progress-fill::after {
-            content: '🍫';
-            position: absolute;
-            right: -15px;
-            top: -8px;
-            font-size: 16px;
-            animation: bounce 0.6s ease-in-out infinite alternate;
-        }
-
-        @keyframes fillProgress {
-            0% { width: 0%; }
-            70% { width: 100%; }
-            100% { width: 100%; }
-        }
-
-        @keyframes bounce {
-            from { transform: translateY(0px); }
-            to { transform: translateY(-5px); }
-        }
-
-        /* Animated loading text */
-        .loading-text {
-            font-size: 1.4rem;
-            color: #8B4513;
-            font-weight: 500;
-            text-align: center;
-        }
-
-        .dot {
-            opacity: 0;
-            animation: dotPulse 1.5s infinite;
-        }
-
-        .dot:nth-child(1) { animation-delay: 0s; }
-        .dot:nth-child(2) { animation-delay: 0.5s; }
-        .dot:nth-child(3) { animation-delay: 1s; }
-
-        @keyframes dotPulse {
-            0%, 60%, 100% { opacity: 0; }
-            30% { opacity: 1; }
-        }
-
-        .final-title {
-            font-size: 2rem;
-            color: #8B4513;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        .final-subtitle {
+        .love-text {
             font-size: 1.3rem;
-            color: #A0522D;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .location-info {
-            font-size: 1.5rem;
             color: #2d3436;
-            margin: 1rem 0;
             font-weight: 600;
-            text-align: center;
-            background: rgba(210, 105, 30, 0.1);
-            padding: 0.8rem;
-            border-radius: 10px;
-            border: 2px solid #D2691E;
         }
 
-        .final-cute {
-            font-size: 1.2rem;
-            color: #8B4513;
-            margin: 1.5rem 0;
+        /* Typing Animation */
+        .typing-container {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .typing-line {
+            font-size: 1.5rem;
+            color: #e84393;
             font-weight: 500;
+            opacity: 0;
+            margin-bottom: 1.5rem;
+            border-right: 2px solid #e84393;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 0;
+        }
+
+        /* Floating Hearts */
+        .floating-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-heart {
+            position: absolute;
+            color: rgba(232, 67, 147, 0.6);
+            font-size: 1.5rem;
+            animation: floatUp 4s ease-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Final Message */
+        .final-message {
             text-align: center;
         }
 
-        .final-note {
-            font-size: 1rem;
-            color: #A0522D;
-            font-style: italic;
-            text-align: center;
+        .final-line {
+            font-size: 1.4rem;
+            color: #2d3436;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .final-line.fade-in {
+            animation: finalFadeIn 1s ease-out forwards;
+        }
+
+        .final-location {
+            font-size: 1.8rem;
+            color: #e84393;
+            font-weight: 700;
+            margin: 3rem 0;
+            padding: 1.5rem;
+            background: rgba(232, 67, 147, 0.1);
+            border-radius: 15px;
+            border: 2px solid #fd79a8;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .final-location.fade-in {
+            animation: finalFadeIn 1s ease-out forwards;
+        }
+
+        @keyframes finalFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Mobile responsiveness */
@@ -888,83 +859,37 @@
                 margin-top: 50px;
             }
 
-            .game-title {
-                font-size: 1.8rem;
-            }
-
-            .game-subtitle {
-                font-size: 1.1rem;
+            .opening-title {
+                font-size: 2rem;
             }
 
             .step-title {
-                font-size: 1.4rem;
+                font-size: 1.5rem;
             }
 
-            .option-card {
-                padding: 0.8rem;
-                flex-direction: column;
-                text-align: center;
-                gap: 0.5rem;
+            .vibe-options {
+                grid-template-columns: 1fr;
             }
 
-            .option-emoji {
-                min-width: auto;
+            .love-options {
+                grid-template-columns: 1fr;
             }
 
-            .chocolate-loader {
-                width: 100px;
-                height: 70px;
+            .memory-card {
+                padding: 1.2rem;
             }
 
-            .chocolate-bar {
-                width: 80px;
-                height: 50px;
-            }
-
-            .chocolate-bar::before {
-                width: 15px;
-                height: 15px;
-                top: 8px;
-                left: 12px;
-                box-shadow: 
-                    20px 0 #654321,
-                    40px 0 #654321,
-                    0 18px #654321,
-                    20px 18px #654321,
-                    40px 18px #654321;
-            }
-
-            .chocolate-progress {
-                width: 160px;
-                height: 16px;
-            }
-
-            .progress-fill::after {
-                font-size: 14px;
-                right: -12px;
-                top: -6px;
-            }
-
-            .loading-text {
+            .typing-line {
                 font-size: 1.2rem;
             }
 
-            .stirring-bowl {
-                width: 80px;
-                height: 50px;
+            .final-line {
+                font-size: 1.2rem;
             }
 
-            .spoon {
-                width: 3px;
-                height: 32px;
-                top: -12px;
-            }
-
-            .spoon::before {
-                width: 10px;
-                height: 6px;
-                left: -3px;
-                top: -3px;
+            .final-location {
+                font-size: 1.5rem;
+                padding: 1.2rem;
             }
         }
     </style>
@@ -988,267 +913,303 @@
     <div class="heart" style="left: 90%; animation-delay: -8s;">💖</div>
 
     <div class="container">
-        <!-- Game Welcome Screen -->
-        <div class="game-screen active" id="welcomeScreen">
-            <div class="game-title">🍫 Happy Chocolate Day 🍫</div>
-            <div class="game-subtitle">Let's make your perfect chocolate 😋</div>
-            <div class="game-helper">Answer a few cute questions…</div>
-            <button class="game-btn" onclick="startGame()">Let's Start! ✨</button>
+        <div class="floating-hearts"></div>
+        
+        <!-- Opening Screen -->
+        <div class="valentine-screen active" id="openingScreen">
+            <div class="opening-title">Happy Valentine's Day ❤️</div>
+            <div class="opening-subtitle">I made something small for you…</div>
+            <button class="valentine-btn" onclick="startExperience()">Start ❤️</button>
         </div>
 
-        <!-- Step 1: Chocolate Type -->
-        <div class="game-screen" id="step1">
-            <div class="step-title">Choose your chocolate type 🍫</div>
-            <div class="options-container">
-                <div class="option-card" onclick="selectOption('type', 'dark')">
-                    <div class="option-emoji">🍫</div>
-                    <div class="option-text">Dark Chocolate</div>
+        <!-- Step 1: Memory Game -->
+        <div class="valentine-screen" id="memoryGame">
+            <div class="step-title">A few things I wanted to share…</div>
+            <div class="memory-cards">
+                <div class="memory-card" onclick="revealMemory('first')" id="card1">
+                    <div class="card-title">The first time we talked</div>
+                    <div class="card-reveal" id="memory1">
+                        I knew there was something special about you from that very first conversation. Your voice, your laugh – everything felt right.
+                    </div>
                 </div>
-                <div class="option-card" onclick="selectOption('type', 'milk')">
-                    <div class="option-emoji">🍬</div>
-                    <div class="option-text">Milk Chocolate</div>
+                <div class="memory-card" onclick="revealMemory('smile')" id="card2">
+                    <div class="card-title">Your smile</div>
+                    <div class="card-reveal" id="memory2">
+                        It lights up everything around you. When you smile, the world feels warmer, brighter, more beautiful.
+                    </div>
                 </div>
-                <div class="option-card" onclick="selectOption('type', 'surprise')">
-                    <div class="option-emoji">🎁</div>
-                    <div class="option-text">Surprise Chocolate</div>
+                <div class="memory-card" onclick="revealMemory('like')" id="card3">
+                    <div class="card-title">Something I like about you</div>
+                    <div class="card-reveal" id="memory3">
+                        The way you care about others, how genuine you are, and how you make even ordinary moments feel extraordinary.
+                    </div>
                 </div>
             </div>
-            <div class="cute-response" id="step1Response">Nice choice 😍</div>
+            <button class="valentine-btn hidden" id="nextFromMemory" onclick="nextToVibe()">Continue ❤️</button>
         </div>
 
-        <!-- Step 2: Sweetness Level -->
-        <div class="game-screen" id="step2">
-            <div class="step-title">How sweet should it be? 🍯</div>
-            <div class="options-container">
-                <div class="option-card" onclick="selectOption('sweetness', 'little')">
-                    <div class="option-emoji">😊</div>
-                    <div class="option-text">Just a little</div>
+        <!-- Step 2: Choose Your Vibe -->
+        <div class="valentine-screen" id="vibeChoice">
+            <div class="step-title">How do you make my world feel?</div>
+            <div class="vibe-options">
+                <div class="vibe-card" onclick="selectVibe('calm')">
+                    <div class="vibe-emoji">🌤</div>
+                    <div class="vibe-text">Calm</div>
                 </div>
-                <div class="option-card" onclick="selectOption('sweetness', 'medium')">
-                    <div class="option-emoji">😄</div>
-                    <div class="option-text">Medium sweet</div>
+                <div class="vibe-card" onclick="selectVibe('bright')">
+                    <div class="vibe-emoji">☀️</div>
+                    <div class="vibe-text">Bright</div>
                 </div>
-                <div class="option-card" onclick="selectOption('sweetness', 'extra')">
-                    <div class="option-emoji">🥰</div>
-                    <div class="option-text">Extra sweet</div>
+                <div class="vibe-card" onclick="selectVibe('magical')">
+                    <div class="vibe-emoji">🌈</div>
+                    <div class="vibe-text">Magical</div>
+                </div>
+                <div class="vibe-card" onclick="selectVibe('exciting')">
+                    <div class="vibe-emoji">🔥</div>
+                    <div class="vibe-text">Exciting</div>
                 </div>
             </div>
-            <div class="cute-response" id="step2Response">Perfect, noted 💕</div>
+            <div class="vibe-response" id="vibeResponse">That's exactly what you are to me ❤️</div>
         </div>
 
-        <!-- Step 3: Sugar Preference -->
-        <div class="game-screen" id="step3">
-            <div class="step-title">Add sugar according to your taste?</div>
-            <div class="options-container">
-                <div class="option-card" onclick="selectOption('sugar', 'none')">
-                    <div class="option-emoji">🚫</div>
-                    <div class="option-text">No extra sugar</div>
+        <!-- Step 3: Personal Touch -->
+        <div class="valentine-screen" id="personalTouch">
+            <div class="step-title">One last thing…</div>
+            <div class="question-text">What should love feel like?</div>
+            <div class="love-options">
+                <div class="love-card" onclick="selectLove('safe')">
+                    <div class="love-text">Safe</div>
                 </div>
-                <div class="option-card" onclick="selectOption('sugar', 'little')">
-                    <div class="option-emoji">➕</div>
-                    <div class="option-text">A little sugar</div>
+                <div class="love-card" onclick="selectLove('fun')">
+                    <div class="love-text">Fun</div>
                 </div>
-                <div class="option-card" onclick="selectOption('sugar', 'sweet')">
-                    <div class="option-emoji">🍭</div>
-                    <div class="option-text">Make it sweet!</div>
+                <div class="love-card" onclick="selectLove('supportive')">
+                    <div class="love-text">Supportive</div>
                 </div>
-            </div>
-            <div class="cute-response" id="step3Response">Got it 😋</div>
-        </div>
-
-        <!-- Step 4: Extra Toppings -->
-        <div class="game-screen" id="step4">
-            <div class="step-title">Anything extra? ✨</div>
-            <div class="step-subtitle">(You can choose multiple!)</div>
-            <div class="options-container">
-                <div class="option-card multi-select" onclick="toggleTopping('nuts')">
-                    <div class="option-emoji">🥜</div>
-                    <div class="option-text">Nuts</div>
+                <div class="love-card" onclick="selectLove('forever')">
+                    <div class="love-text">Forever</div>
                 </div>
-                <div class="option-card multi-select" onclick="toggleTopping('berries')">
-                    <div class="option-emoji">🍓</div>
-                    <div class="option-text">Berries</div>
-                </div>
-                <div class="option-card multi-select" onclick="toggleTopping('cookies')">
-                    <div class="option-emoji">🍪</div>
-                    <div class="option-text">Cookies</div>
-                </div>
-                <div class="option-card multi-select" onclick="toggleTopping('love')">
-                    <div class="option-emoji">💖</div>
-                    <div class="option-text">Extra love</div>
-                </div>
-            </div>
-            <div class="cute-response" id="step4Response">Yummy combo 😍</div>
-            <button class="game-btn" onclick="prepareChocolate()">Prepare My Chocolate! 🍫</button>
-        </div>
-
-        <!-- Loading Screen -->
-        <div class="game-screen" id="loadingScreen">
-            <div class="loading-title">Preparing your custom chocolate</div>
-            
-            <!-- Chocolate melting animation -->
-            <div class="chocolate-loader">
-                <div class="chocolate-bar">
-                    <div class="melting-drops"></div>
-                </div>
-            </div>
-            
-            <!-- Alternative stirring bowl animation -->
-            <div class="stirring-bowl" style="display: none;">
-                <div class="spoon"></div>
-            </div>
-            
-            <!-- Chocolate progress bar -->
-            <div class="chocolate-progress">
-                <div class="progress-fill"></div>
-            </div>
-            
-            <!-- Animated loading text -->
-            <div class="loading-text">
-                Almost ready<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
             </div>
         </div>
 
-        <!-- Final Screen -->
-        <div class="game-screen" id="finalScreen">
-            <div class="final-title">Your custom chocolate is ready ❤️</div>
-            <div class="final-subtitle">Please come and collect it at</div>
-            <div class="location-info">C 2205 / 2206</div>
-            <div class="final-cute">Waiting for you 😊🍫</div>
-            <div class="final-note">Real chocolate included 😉</div>
+        <!-- Emotional Build-up -->
+        <div class="valentine-screen" id="buildUp">
+            <div class="typing-container">
+                <div class="typing-line" id="line1">Every choice you made…</div>
+                <div class="typing-line" id="line2">Feels like you.</div>
+                <div class="typing-line" id="line3">Feels like us.</div>
+            </div>
+            <div class="floating-hearts" id="floatingHearts"></div>
+        </div>
+
+        <!-- Final Reveal -->
+        <div class="valentine-screen" id="finalReveal">
+            <div class="final-message">
+                <div class="final-line fade-in" id="finalLine1">I don't need a perfect day.</div>
+                <div class="final-line fade-in" id="finalLine2">I just need moments with you.</div>
+                <div class="final-line fade-in" id="finalLine3">Come see me ❤️</div>
+                <div class="final-location fade-in" id="finalLocation">C 2205 / 2206</div>
+                <div class="final-line fade-in" id="finalLine4">I'll be waiting.</div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Game state
+        let currentScreen = 'opening';
         let gameState = {
-            type: null,
-            sweetness: null,
-            sugar: null,
-            toppings: []
+            memoriesRevealed: 0,
+            selectedVibe: '',
+            selectedLove: ''
         };
-
-        let currentStep = 0;
-        const steps = ['welcomeScreen', 'step1', 'step2', 'step3', 'step4', 'loadingScreen', 'finalScreen'];
-
-        // Initialize game
-        document.addEventListener('DOMContentLoaded', () => {
-            createChocolateFloat();
-            showScreen('welcomeScreen');
-        });
-
-        // Game functions
-        function startGame() {
-            nextStep();
-        }
-
-        function showScreen(screenId) {
-            // Hide all screens
-            document.querySelectorAll('.game-screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
+        
+        // Show opening screen initially
+        document.getElementById('opening').classList.add('active');
+        
+        // Floating hearts animation
+        function createFloatingHearts() {
+            const heartsContainer = document.querySelector('.floating-hearts');
+            if (!heartsContainer) return;
             
-            // Show target screen
+            const heartSymbols = ['❤️', '💕', '💖', '💗', '🤍'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => {
+                    if (heartsContainer.contains(heart)) {
+                        heartsContainer.removeChild(heart);
+                    }
+                }, 4000);
+            }, 800);
+        }
+        
+        // Start floating hearts
+        createFloatingHearts();
+        
+        function startExperience() {
+            switchScreen('opening', 'memory-game');
+            currentScreen = 'memory-game';
+        }
+        
+        function switchScreen(fromScreen, toScreen) {
+            const from = document.getElementById(fromScreen);
+            const to = document.getElementById(toScreen);
+            
+            from.classList.remove('active');
+            
             setTimeout(() => {
-                document.getElementById(screenId).classList.add('active');
+                to.classList.add('active');
             }, 300);
         }
-
-        function nextStep() {
-            currentStep++;
-            if (currentStep < steps.length) {
-                showScreen(steps[currentStep]);
+        
+        function revealMemory(cardId, cardElement) {
+            if (cardElement.classList.contains('revealed')) return;
+            
+            const reveals = {
+                'memory1': "The first time we talked, I remember thinking... 'Wow, she really gets it.' There was something about the way you listened, really listened, that made me feel understood.",
+                'memory2': "Your smile... it's not just beautiful, it's genuine. When you smile, your whole face lights up and for a moment, everything feels right with the world.",
+                'memory3': "What I like most about you? Your kindness. The way you care about people, about details, about making things better. It's rare and it's beautiful."
+            };
+            
+            cardElement.classList.add('revealed');
+            cardElement.querySelector('.card-reveal').textContent = reveals[cardId];
+            
+            gameState.memoriesRevealed++;
+            
+            // Show next button when all memories are revealed
+            if (gameState.memoriesRevealed === 3) {
+                setTimeout(() => {
+                    document.getElementById('memory-next').style.display = 'block';
+                    document.getElementById('memory-next').style.opacity = '1';
+                }, 1000);
             }
         }
-
-        function selectOption(category, value) {
-            gameState[category] = value;
+        
+        function proceedToVibe() {
+            switchScreen('memory-game', 'vibe-choice');
+            currentScreen = 'vibe-choice';
+        }
+        
+        function selectVibe(vibe, vibeText) {
+            gameState.selectedVibe = vibe;
             
-            // Visual feedback
-            const currentScreen = steps[currentStep];
-            const options = document.querySelectorAll(`#${currentScreen} .option-card`);
-            options.forEach(option => option.classList.remove('selected'));
-            event.target.closest('.option-card').classList.add('selected');
+            const responses = {
+                'calm': "Perfect... I love how peaceful and centered you are. 🌙",
+                'bright': "Yes! Your energy lights up every room you enter. ✨",
+                'magical': "I knew it... there's something truly enchanting about you. 🌟",
+                'exciting': "Absolutely! Life is always an adventure with you. 🎉"
+            };
             
-            // Show cute response
-            const response = document.getElementById(`${currentScreen}Response`);
-            response.classList.add('show');
+            const responseEl = document.getElementById('vibe-response');
+            responseEl.textContent = responses[vibe];
+            responseEl.classList.add('show');
             
-            // Auto advance to next step after delay
             setTimeout(() => {
-                nextStep();
+                document.getElementById('vibe-next').style.display = 'block';
+                document.getElementById('vibe-next').style.opacity = '1';
             }, 1500);
         }
-
-        function toggleTopping(topping) {
-            const card = event.target.closest('.option-card');
-            
-            if (gameState.toppings.includes(topping)) {
-                // Remove topping
-                gameState.toppings = gameState.toppings.filter(t => t !== topping);
-                card.classList.remove('selected');
-            } else {
-                // Add topping
-                gameState.toppings.push(topping);
-                card.classList.add('selected');
-            }
-            
-            // Show response if any topping selected
-            const response = document.getElementById('step4Response');
-            if (gameState.toppings.length > 0) {
-                response.classList.add('show');
-            } else {
-                response.classList.remove('show');
-            }
+        
+        function proceedToLove() {
+            switchScreen('vibe-choice', 'personal-touch');
+            currentScreen = 'personal-touch';
         }
-
-        function prepareChocolate() {
-            showScreen('loadingScreen');
+        
+        function selectLove(love, loveText) {
+            gameState.selectedLove = love;
             
-            // Add some variety to the loading animations
-            const chocolateLoader = document.querySelector('.chocolate-loader');
-            const stirringBowl = document.querySelector('.stirring-bowl');
-            
-            // Randomly choose animation style
-            if (Math.random() > 0.5) {
-                chocolateLoader.style.display = 'block';
-                stirringBowl.style.display = 'none';
-            } else {
-                chocolateLoader.style.display = 'none';
-                stirringBowl.style.display = 'block';
-            }
-            
-            // Simulate preparation time with cute loading
             setTimeout(() => {
-                showScreen('finalScreen');
-                createChocolateFloat(); // Final celebration
-            }, 3000); // Extended to 3 seconds for better loading experience
+                document.getElementById('love-next').style.display = 'block';
+                document.getElementById('love-next').style.opacity = '1';
+            }, 800);
         }
-
-        // Function to create floating chocolate animation
-        function createChocolateFloat() {
-            const chocolates = ['🍫', '🍬', '�', '�', '💖'];
-            for (let i = 0; i < 12; i++) {
-                setTimeout(() => {
-                    const chocolate = document.createElement('div');
-                    chocolate.className = 'chocolate-float';
-                    chocolate.innerHTML = chocolates[Math.floor(Math.random() * chocolates.length)];
-                    chocolate.style.left = Math.random() * 100 + 'vw';
-                    chocolate.style.animationDelay = Math.random() * 2 + 's';
-                    chocolate.style.animationDuration = (Math.random() * 2 + 3) + 's';
-                    document.body.appendChild(chocolate);
-                    
-                    // Remove chocolate after animation
+        
+        function startBuildUp() {
+            switchScreen('personal-touch', 'emotional-buildup');
+            currentScreen = 'emotional-buildup';
+            
+            // Start typing animation
+            setTimeout(() => {
+                typeMessage();
+            }, 1000);
+        }
+        
+        function typeMessage() {
+            const lines = [
+                "You know what I realized?",
+                "All these little moments we've shared...",
+                "They've been building up to something.",
+                "Something I want to tell you in person.",
+                "Will you meet me?"
+            ];
+            
+            const typingContainer = document.querySelector('.typing-container');
+            let currentLine = 0;
+            
+            function typeLine() {
+                if (currentLine >= lines.length) {
                     setTimeout(() => {
-                        chocolate.remove();
-                    }, 6000);
-                }, i * 200);
+                        document.getElementById('buildup-next').style.display = 'block';
+                        document.getElementById('buildup-next').style.opacity = '1';
+                    }, 1000);
+                    return;
+                }
+                
+                const lineElement = document.createElement('div');
+                lineElement.className = 'typing-line';
+                lineElement.style.opacity = '1';
+                typingContainer.appendChild(lineElement);
+                
+                const text = lines[currentLine];
+                let charIndex = 0;
+                
+                const typeInterval = setInterval(() => {
+                    lineElement.textContent = text.substring(0, charIndex + 1);
+                    lineElement.style.width = (charIndex + 1) + 'ch';
+                    charIndex++;
+                    
+                    if (charIndex >= text.length) {
+                        clearInterval(typeInterval);
+                        lineElement.style.borderRight = 'none';
+                        currentLine++;
+                        setTimeout(() => {
+                            typeLine();
+                        }, 800);
+                    }
+                }, 100);
             }
+            
+            typeLine();
         }
-
+        
+        function showFinalReveal() {
+            switchScreen('emotional-buildup', 'final-reveal');
+            currentScreen = 'final-reveal';
+            
+            // Animate final message lines
+            const lines = document.querySelectorAll('.final-line');
+            const location = document.querySelector('.final-location');
+            
+            lines.forEach((line, index) => {
+                setTimeout(() => {
+                    line.classList.add('fade-in');
+                }, index * 1000);
+            });
+            
+            setTimeout(() => {
+                location.classList.add('fade-in');
+            }, lines.length * 1000);
+        }
+        
         // Add some interactive sparkles on mouse move (keeping original feature)
         document.addEventListener('mousemove', (e) => {
-            if (Math.random() < 0.05) { // Reduced frequency for cleaner look
+            if (Math.random() < 0.03) { // Reduced frequency for cleaner look
                 const sparkle = document.createElement('div');
                 sparkle.innerHTML = '✨';
                 sparkle.style.position = 'absolute';
