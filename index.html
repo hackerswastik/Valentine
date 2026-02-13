@@ -20,10 +20,20 @@
                 #fd79a8 50%, 
                 #e84393 75%, 
                 #6c5ce7 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin: 0;
+            padding: 0;
+            margin-top: 60px;
             overflow-x: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: calc(100vh - 120px);
             position: relative;
         }
 
@@ -59,19 +69,7 @@
             }
         }
 
-        .container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 25px;
-            padding: 3rem 2.5rem;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-            position: relative;
-            transform: scale(0.9);
-            animation: slideIn 0.8s ease-out forwards;
-        }
+        /* Remove old container styles - replaced above */
 
         @keyframes slideIn {
             from {
@@ -509,7 +507,7 @@
         }
 
         .opening-title {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             color: #e84393;
             margin-bottom: 1.5rem;
             font-weight: 700;
@@ -518,7 +516,7 @@
         }
 
         .opening-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             color: #74b9ff;
             margin-bottom: 3rem;
             font-weight: 400;
@@ -821,11 +819,15 @@
         .memory-wall {
             position: relative;
             min-height: 100vh;
+            padding: 2rem 0;
             overflow: hidden;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .memory-wall-title {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: #e84393;
             text-align: center;
             margin-bottom: 1rem;
@@ -834,83 +836,143 @@
         }
 
         .memory-wall-subtitle {
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: #74b9ff;
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
             font-style: italic;
             animation: gentleFadeIn 1.5s ease-out 0.3s both;
         }
 
+        /* Hanging line across the top */
+        .hanging-line {
+            position: absolute;
+            top: 80px;
+            left: 5%;
+            right: 5%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #8b4513 20%, #8b4513 80%, transparent);
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
         .hanging-photos-container {
             position: relative;
-            height: 400px;
-            width: 100%;
-            margin: 2rem 0;
+            height: 500px;
+            width: 90%;
+            margin: 0 auto;
+            padding-top: 100px;
         }
 
         .hanging-photo {
             position: absolute;
             opacity: 0;
-            transform: translateY(-100px);
-            transition: all 0.8s ease-out;
+            transform: translateY(-50px) rotate(0deg);
+            transition: all 1s ease-out;
             cursor: pointer;
+            z-index: 5;
         }
 
         .hanging-photo.visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) rotate(0deg);
         }
 
+        /* String/Thread from the line */
         .photo-thread {
             position: absolute;
-            width: 2px;
-            height: 30px;
-            background: linear-gradient(to bottom, rgba(116, 185, 255, 0.6), rgba(116, 185, 255, 0.2));
-            top: -30px;
+            width: 1px;
+            background: #666;
+            top: -100px;
             left: 50%;
-            transform: translateX(-1px);
-            border-radius: 1px;
+            transform: translateX(-0.5px);
+            box-shadow: 1px 0 1px rgba(0, 0, 0, 0.1);
         }
 
+        /* Photo frames - smaller and more realistic */
         .photo-frame {
-            width: 120px;
-            height: 90px;
-            background: white;
+            width: 140px;
+            height: 100px;
+            background: #fff;
             padding: 8px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 3px;
+            box-shadow: 
+                0 2px 8px rgba(0, 0, 0, 0.15),
+                0 4px 20px rgba(0, 0, 0, 0.1);
             transition: all 0.4s ease;
-            animation: gentleSwing 3s ease-in-out infinite;
+            animation: gentleSwing 4s ease-in-out infinite;
             transform-origin: top center;
+            position: relative;
+        }
+
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 8px;
+            background: #ddd;
+            border-radius: 0 0 3px 3px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .photo-frame:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(232, 67, 147, 0.3);
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 
+                0 8px 25px rgba(232, 67, 147, 0.3),
+                0 4px 20px rgba(0, 0, 0, 0.2);
+            z-index: 15;
         }
 
         .photo-frame.clicked {
-            transform: scale(1.1);
-            z-index: 10;
+            transform: scale(1.15) rotate(-1deg);
+            z-index: 20;
+            box-shadow: 
+                0 12px 35px rgba(232, 67, 147, 0.4),
+                0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
         .photo-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 4px;
+            border-radius: 2px;
+            display: block;
         }
 
+        /* Different swing animations for variety */
         @keyframes gentleSwing {
             0%, 100% { 
                 transform: rotate(0deg); 
             }
             25% { 
-                transform: rotate(2deg); 
+                transform: rotate(1.5deg); 
             }
             75% { 
-                transform: rotate(-2deg); 
+                transform: rotate(-1.5deg); 
+            }
+        }
+
+        @keyframes gentleSwing2 {
+            0%, 100% { 
+                transform: rotate(0deg); 
+            }
+            25% { 
+                transform: rotate(-1deg); 
+            }
+            75% { 
+                transform: rotate(1deg); 
+            }
+        }
+
+        @keyframes gentleSwing3 {
+            0%, 100% { 
+                transform: rotate(0deg); 
+            }
+            50% { 
+                transform: rotate(2deg); 
             }
         }
 
@@ -1002,29 +1064,92 @@
         }
 
         /* Mobile responsiveness for Memory Wall */
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
             .memory-wall-title {
-                font-size: 1.6rem;
+                font-size: 2rem;
+            }
+
+            .memory-wall-subtitle {
+                font-size: 1rem;
+                margin-bottom: 3rem;
             }
 
             .hanging-photos-container {
-                height: 350px;
+                height: 400px;
+                width: 95%;
+                padding-top: 80px;
             }
 
             .photo-frame {
-                width: 100px;
-                height: 75px;
+                width: 120px;
+                height: 85px;
                 padding: 6px;
             }
 
             .photo-caption {
-                max-width: 280px;
+                max-width: 300px;
                 padding: 0.8rem 1.5rem;
                 bottom: 15px;
             }
 
             .caption-text {
                 font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .memory-wall {
+                padding: 1rem 0;
+            }
+
+            .memory-wall-title {
+                font-size: 1.8rem;
+            }
+
+            .hanging-photos-container {
+                height: 350px;
+                padding-top: 70px;
+            }
+
+            .photo-frame {
+                width: 100px;
+                height: 75px;
+                padding: 5px;
+            }
+
+            .photo-caption {
+                max-width: 280px;
+                padding: 0.8rem 1.2rem;
+                bottom: 10px;
+            }
+
+            .caption-text {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Desktop full-width styles */
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1200px;
+                padding: 3rem 2rem;
+            }
+
+            .memory-wall {
+                max-width: 100%;
+                padding: 3rem 0;
+            }
+
+            .hanging-photos-container {
+                height: 600px;
+                width: 85%;
+                padding-top: 120px;
+            }
+
+            .photo-frame {
+                width: 160px;
+                height: 120px;
+                padding: 10px;
             }
         }
 
@@ -1205,7 +1330,9 @@
         <div class="valentine-screen" id="memoryWall">
             <div class="memory-wall">
                 <div class="memory-wall-title">Our Memory Wall</div>
-                <div class="memory-wall-subtitle">Click on each memory to see what it means to me ✨</div>
+                <div class="memory-wall-subtitle">Click on each hanging photo to see what it means to me ✨</div>
+                
+                <div class="hanging-line"></div>
                 
                 <div class="hanging-photos-container" id="hangingPhotos">
                     <!-- Photos will be dynamically added here -->
@@ -1364,27 +1491,36 @@
             const container = document.getElementById('hangingPhotos');
             const photoElement = document.createElement('div');
             
-            // Random horizontal position (avoiding edges)
-            const leftPosition = 15 + (index * 12) + Math.random() * 10;
-            const topPosition = Math.random() * 50 + 50; // Between 50px and 100px from top
+            // Better horizontal distribution
+            const positions = [12, 25, 38, 51, 64, 77, 90];
+            const leftPosition = positions[index] || (15 + index * 12);
+            const topPosition = Math.random() * 30 + 20; // Random height variation
+            
+            // Different thread lengths for visual interest
+            const threadLength = 80 + Math.random() * 40;
+            
+            // Assign different swing animations
+            const swingAnimations = ['gentleSwing', 'gentleSwing2', 'gentleSwing3'];
+            const swingAnimation = swingAnimations[index % 3];
             
             photoElement.className = 'hanging-photo';
             photoElement.style.left = leftPosition + '%';
             photoElement.style.top = topPosition + 'px';
             
             photoElement.innerHTML = `
-                <div class="photo-thread"></div>
-                <div class="photo-frame" onclick="clickPhoto(${index})">
-                    <img src="${photo.src}" alt="Memory ${index + 1}" loading="lazy">
+                <div class="photo-thread" style="height: ${threadLength}px;"></div>
+                <div class="photo-frame" onclick="clickPhoto(${index})" style="animation: ${swingAnimation} ${4 + Math.random() * 2}s ease-in-out infinite;">
+                    <img src="${photo.src}" alt="Memory ${index + 1}" loading="lazy" onerror="this.style.display='none'; this.nextSibling.style.display='block';">
+                    <div style="display:none; text-align:center; color:#666; font-size:12px; padding: 20px;">📷</div>
                 </div>
             `;
             
             container.appendChild(photoElement);
             
-            // Trigger animation
+            // Staggered animation with more delay
             setTimeout(() => {
                 photoElement.classList.add('visible');
-            }, 100);
+            }, index * 400 + 200);
         }
 
         function clickPhoto(index) {
