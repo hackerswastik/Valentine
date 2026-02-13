@@ -1460,13 +1460,13 @@
         };
 
         const memoryPhotos = [
-            { src: 'images/memory1.jpeg', caption: 'Every moment we share becomes precious to me ❤️' },
-            { src: 'images/memory2.jpeg', caption: 'Your laugh makes everything brighter 🌟' },
-            { src: 'images/memory3.jpeg', caption: 'Simple moments with you feel magical ✨' },
-            { src: 'images/memory4.jpeg', caption: 'You bring color to my world 🌈' },
-            { src: 'images/memory5.jpeg', caption: 'Being with you feels like home 🏠' },
-            { src: 'images/memory6.jpeg', caption: 'These memories are my favorite treasures 💎' },
-            { src: 'images/memory7.jpeg', caption: 'With you, ordinary becomes extraordinary 💕' }
+            { src: './images/memory1.jpeg', caption: 'Every moment we share becomes precious to me ❤️' },
+            { src: './images/memory2.jpeg', caption: 'Your laugh makes everything brighter 🌟' },
+            { src: './images/memory3.jpeg', caption: 'Simple moments with you feel magical ✨' },
+            { src: './images/memory4.jpeg', caption: 'You bring color to my world 🌈' },
+            { src: './images/memory5.jpeg', caption: 'Being with you feels like home 🏠' },
+            { src: './images/memory6.jpeg', caption: 'These memories are my favorite treasures 💎' },
+            { src: './images/memory7.jpeg', caption: 'With you, ordinary becomes extraordinary 💕' }
         ];
 
         function initializeMemoryWall() {
@@ -1507,13 +1507,40 @@
             photoElement.style.left = leftPosition + '%';
             photoElement.style.top = topPosition + 'px';
             
+            // Create image element first to handle loading better
+            const img = document.createElement('img');
+            img.src = photo.src;
+            img.alt = `Memory ${index + 1}`;
+            img.loading = 'eager'; // Load images immediately
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'cover';
+            img.style.borderRadius = '2px';
+            img.style.display = 'block';
+            
+            // Error handling for images
+            img.onerror = function() {
+                console.log(`Failed to load image: ${photo.src}`);
+                this.style.display = 'none';
+                const placeholder = document.createElement('div');
+                placeholder.innerHTML = '📷';
+                placeholder.style.cssText = 'display:flex; align-items:center; justify-content:center; height:100%; font-size:24px; color:#666; background:#f0f0f0; border-radius:2px;';
+                this.parentNode.appendChild(placeholder);
+            };
+            
+            img.onload = function() {
+                console.log(`Successfully loaded image: ${photo.src}`);
+            };
+            
             photoElement.innerHTML = `
                 <div class="photo-thread" style="height: ${threadLength}px;"></div>
                 <div class="photo-frame" onclick="clickPhoto(${index})" style="animation: ${swingAnimation} ${4 + Math.random() * 2}s ease-in-out infinite;">
-                    <img src="${photo.src}" alt="Memory ${index + 1}" loading="lazy" onerror="this.style.display='none'; this.nextSibling.style.display='block';">
-                    <div style="display:none; text-align:center; color:#666; font-size:12px; padding: 20px;">📷</div>
                 </div>
             `;
+            
+            // Append image to photo frame after creating the structure
+            const photoFrame = photoElement.querySelector('.photo-frame');
+            photoFrame.appendChild(img);
             
             container.appendChild(photoElement);
             
