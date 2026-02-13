@@ -817,6 +817,217 @@
             }
         }
 
+        /* Memory Wall Styles */
+        .memory-wall {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .memory-wall-title {
+            font-size: 2rem;
+            color: #e84393;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            animation: gentleFadeIn 1.5s ease-out;
+        }
+
+        .memory-wall-subtitle {
+            font-size: 1rem;
+            color: #74b9ff;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-style: italic;
+            animation: gentleFadeIn 1.5s ease-out 0.3s both;
+        }
+
+        .hanging-photos-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+            margin: 2rem 0;
+        }
+
+        .hanging-photo {
+            position: absolute;
+            opacity: 0;
+            transform: translateY(-100px);
+            transition: all 0.8s ease-out;
+            cursor: pointer;
+        }
+
+        .hanging-photo.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .photo-thread {
+            position: absolute;
+            width: 2px;
+            height: 30px;
+            background: linear-gradient(to bottom, rgba(116, 185, 255, 0.6), rgba(116, 185, 255, 0.2));
+            top: -30px;
+            left: 50%;
+            transform: translateX(-1px);
+            border-radius: 1px;
+        }
+
+        .photo-frame {
+            width: 120px;
+            height: 90px;
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            animation: gentleSwing 3s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        .photo-frame:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(232, 67, 147, 0.3);
+        }
+
+        .photo-frame.clicked {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        @keyframes gentleSwing {
+            0%, 100% { 
+                transform: rotate(0deg); 
+            }
+            25% { 
+                transform: rotate(2deg); 
+            }
+            75% { 
+                transform: rotate(-2deg); 
+            }
+        }
+
+        .photo-caption {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: 15;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .photo-caption.show {
+            opacity: 1;
+        }
+
+        .caption-text {
+            font-size: 1rem;
+            color: #2d3436;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .memory-wall-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .memory-wall-overlay.show {
+            opacity: 1;
+        }
+
+        .memory-progress {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #74b9ff;
+            opacity: 0.8;
+        }
+
+        .floating-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            color: rgba(232, 67, 147, 0.4);
+            font-size: 12px;
+            animation: floatParticle 6s ease-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-50px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile responsiveness for Memory Wall */
+        @media (max-width: 480px) {
+            .memory-wall-title {
+                font-size: 1.6rem;
+            }
+
+            .hanging-photos-container {
+                height: 350px;
+            }
+
+            .photo-frame {
+                width: 100px;
+                height: 75px;
+                padding: 6px;
+            }
+
+            .photo-caption {
+                max-width: 280px;
+                padding: 0.8rem 1.5rem;
+                bottom: 15px;
+            }
+
+            .caption-text {
+                font-size: 0.9rem;
+            }
+        }
+
         /* Mobile responsiveness */
         @media (max-width: 480px) {
             .container {
@@ -990,6 +1201,28 @@
             </div>
         </div>
 
+        <!-- Memory Wall -->
+        <div class="valentine-screen" id="memoryWall">
+            <div class="memory-wall">
+                <div class="memory-wall-title">Our Memory Wall</div>
+                <div class="memory-wall-subtitle">Click on each memory to see what it means to me ✨</div>
+                
+                <div class="hanging-photos-container" id="hangingPhotos">
+                    <!-- Photos will be dynamically added here -->
+                </div>
+                
+                <div class="memory-progress" id="memoryProgress">
+                    <span id="clickedCount">0</span> of <span id="totalCount">0</span> memories explored
+                </div>
+                
+                <div class="floating-particles" id="floatingParticles"></div>
+                <div class="memory-wall-overlay" id="memoryOverlay"></div>
+                <div class="photo-caption" id="photoCaption">
+                    <div class="caption-text" id="captionText"></div>
+                </div>
+            </div>
+        </div>
+
         <!-- Emotional Build-up -->
         <div class="valentine-screen" id="buildUp">
             <div class="typing-container">
@@ -1003,11 +1236,10 @@
         <!-- Final Reveal -->
         <div class="valentine-screen" id="finalReveal">
             <div class="final-message">
-                <div class="final-line fade-in" id="finalLine1">I don't need a perfect day.</div>
-                <div class="final-line fade-in" id="finalLine2">I just need moments with you.</div>
-                <div class="final-line fade-in" id="finalLine3">Come see me ❤️</div>
+                <div class="final-line fade-in" id="finalLine1">Let's make a new memory today ❤️</div>
+                <div class="final-line fade-in" id="finalLine2">Come see me at</div>
                 <div class="final-location fade-in" id="finalLocation">C 2205 / 2206</div>
-                <div class="final-line fade-in" id="finalLine4">I'll be waiting.</div>
+                <div class="final-line fade-in" id="finalLine3">I'll be waiting 😊</div>
             </div>
         </div>
     </div>
@@ -1087,10 +1319,137 @@
             gameState.selectedLove = loveType;
             
             setTimeout(() => {
-                switchScreen('personalTouch', 'buildUp');
-                gameState.currentScreen = 'buildUp';
-                startTypingAnimation();
+                switchScreen('personalTouch', 'memoryWall');
+                gameState.currentScreen = 'memoryWall';
+                initializeMemoryWall();
             }, 1000);
+        }
+
+        // Memory Wall functionality
+        let memoryWallState = {
+            clickedPhotos: 0,
+            totalPhotos: 7,
+            isPhotoActive: false
+        };
+
+        const memoryPhotos = [
+            { src: 'images/memory1.jpeg', caption: 'Every moment we share becomes precious to me ❤️' },
+            { src: 'images/memory2.jpeg', caption: 'Your laugh makes everything brighter 🌟' },
+            { src: 'images/memory3.jpeg', caption: 'Simple moments with you feel magical ✨' },
+            { src: 'images/memory4.jpeg', caption: 'You bring color to my world 🌈' },
+            { src: 'images/memory5.jpeg', caption: 'Being with you feels like home 🏠' },
+            { src: 'images/memory6.jpeg', caption: 'These memories are my favorite treasures 💎' },
+            { src: 'images/memory7.jpeg', caption: 'With you, ordinary becomes extraordinary 💕' }
+        ];
+
+        function initializeMemoryWall() {
+            const container = document.getElementById('hangingPhotos');
+            const progressTotal = document.getElementById('totalCount');
+            
+            container.innerHTML = '';
+            progressTotal.textContent = memoryWallState.totalPhotos;
+            
+            // Create floating particles
+            createFloatingParticles();
+            
+            // Add photos with staggered animation
+            memoryPhotos.forEach((photo, index) => {
+                setTimeout(() => {
+                    createHangingPhoto(photo, index);
+                }, index * 800);
+            });
+        }
+
+        function createHangingPhoto(photo, index) {
+            const container = document.getElementById('hangingPhotos');
+            const photoElement = document.createElement('div');
+            
+            // Random horizontal position (avoiding edges)
+            const leftPosition = 15 + (index * 12) + Math.random() * 10;
+            const topPosition = Math.random() * 50 + 50; // Between 50px and 100px from top
+            
+            photoElement.className = 'hanging-photo';
+            photoElement.style.left = leftPosition + '%';
+            photoElement.style.top = topPosition + 'px';
+            
+            photoElement.innerHTML = `
+                <div class="photo-thread"></div>
+                <div class="photo-frame" onclick="clickPhoto(${index})">
+                    <img src="${photo.src}" alt="Memory ${index + 1}" loading="lazy">
+                </div>
+            `;
+            
+            container.appendChild(photoElement);
+            
+            // Trigger animation
+            setTimeout(() => {
+                photoElement.classList.add('visible');
+            }, 100);
+        }
+
+        function clickPhoto(index) {
+            if (memoryWallState.isPhotoActive) return;
+            
+            const photo = memoryPhotos[index];
+            const photoFrame = document.querySelectorAll('.photo-frame')[index];
+            const overlay = document.getElementById('memoryOverlay');
+            const caption = document.getElementById('photoCaption');
+            const captionText = document.getElementById('captionText');
+            const clickedCount = document.getElementById('clickedCount');
+            
+            // Mark photo as clicked
+            photoFrame.classList.add('clicked');
+            memoryWallState.isPhotoActive = true;
+            
+            // Show overlay and caption
+            overlay.classList.add('show');
+            captionText.textContent = photo.caption;
+            caption.classList.add('show');
+            
+            memoryWallState.clickedPhotos++;
+            clickedCount.textContent = memoryWallState.clickedPhotos;
+            
+            // Hide caption after 3 seconds
+            setTimeout(() => {
+                caption.classList.remove('show');
+                overlay.classList.remove('show');
+                memoryWallState.isPhotoActive = false;
+                
+                // Check if enough photos have been clicked
+                if (memoryWallState.clickedPhotos >= 4) {
+                    setTimeout(() => {
+                        proceedToFinalReveal();
+                    }, 1000);
+                }
+            }, 3000);
+        }
+
+        function createFloatingParticles() {
+            const container = document.getElementById('floatingParticles');
+            const particles = ['❤️', '💕', '✨', '🌟', '💖'];
+            
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                
+                container.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (container.contains(particle)) {
+                        container.removeChild(particle);
+                    }
+                }, 7000);
+            }, 1500);
+        }
+
+        function proceedToFinalReveal() {
+            switchScreen('memoryWall', 'finalReveal');
+            gameState.currentScreen = 'finalReveal';
+            animateFinalMessage();
         }
 
         function startTypingAnimation() {
@@ -1127,7 +1486,7 @@
         }
 
         function animateFinalMessage() {
-            const lines = ['finalLine1', 'finalLine2', 'finalLine3', 'finalLocation', 'finalLine4'];
+            const lines = ['finalLine1', 'finalLine2', 'finalLocation', 'finalLine3'];
             
             lines.forEach((lineId, index) => {
                 setTimeout(() => {
