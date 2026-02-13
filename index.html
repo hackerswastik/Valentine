@@ -135,66 +135,7 @@
             }
         }
 
-        /* Photo gallery styles */
-        .photo-gallery {
-            display: none;
-            margin: 2rem 0;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .photo-gallery.show {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .photo-slideshow {
-            position: relative;
-            width: 200px;
-            height: 240px;
-            margin: 0 auto 1rem;
-            cursor: pointer;
-        }
-
-        .photo-frame {
-            position: absolute;
-            width: 100%;
-            height: 200px;
-            background: white;
-            padding: 10px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            border-radius: 8px;
-            transform: rotate(-2deg);
-            transition: all 0.3s ease;
-            opacity: 0;
-        }
-
-        .photo-frame.active {
-            opacity: 1;
-            transform: rotate(-2deg) scale(1);
-        }
-
-        .photo-frame:nth-child(even) {
-            transform: rotate(1.5deg);
-        }
-
-        .photo-frame:nth-child(3n) {
-            transform: rotate(-1deg);
-        }
-
-        .photo-frame:hover {
-            transform: rotate(0deg) scale(1.05);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 4px;
-        }
+        /* Photo gallery styles - REMOVE OLD CONFLICTING RULES */
 
         .photo-caption {
             text-align: center;
@@ -890,55 +831,57 @@
         }
 
         /* Photo frames - smaller and more realistic */
-        .photo-frame {
-            width: 140px;
-            height: 100px;
-            background: #fff;
-            padding: 8px;
-            border-radius: 3px;
+        .memory-wall .photo-frame {
+            width: 140px !important;
+            height: 100px !important;
+            background: #fff !important;
+            padding: 8px !important;
+            border-radius: 3px !important;
             box-shadow: 
                 0 2px 8px rgba(0, 0, 0, 0.15),
-                0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s ease;
-            animation: gentleSwing 4s ease-in-out infinite;
-            transform-origin: top center;
-            position: relative;
-            min-height: 100px;
+                0 4px 20px rgba(0, 0, 0, 0.1) !important;
+            transition: all 0.4s ease !important;
+            animation: gentleSwing 4s ease-in-out infinite !important;
+            transform-origin: top center !important;
+            position: relative !important;
+            min-height: 100px !important;
             display: block !important;
-            overflow: hidden;
+            overflow: hidden !important;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
-        .photo-frame::before {
-            content: '';
-            position: absolute;
-            top: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 8px;
-            background: #ddd;
-            border-radius: 0 0 3px 3px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            z-index: 1;
+        .memory-wall .photo-frame::before {
+            content: '' !important;
+            position: absolute !important;
+            top: -8px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: 20px !important;
+            height: 8px !important;
+            background: #ddd !important;
+            border-radius: 0 0 3px 3px !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+            z-index: 1 !important;
         }
 
-        .photo-frame:hover {
-            transform: scale(1.08) rotate(2deg);
+        .memory-wall .photo-frame:hover {
+            transform: scale(1.08) rotate(2deg) !important;
             box-shadow: 
                 0 8px 25px rgba(232, 67, 147, 0.3),
-                0 4px 20px rgba(0, 0, 0, 0.2);
-            z-index: 15;
+                0 4px 20px rgba(0, 0, 0, 0.2) !important;
+            z-index: 15 !important;
         }
 
-        .photo-frame.clicked {
-            transform: scale(1.15) rotate(-1deg);
-            z-index: 20;
+        .memory-wall .photo-frame.clicked {
+            transform: scale(1.15) rotate(-1deg) !important;
+            z-index: 20 !important;
             box-shadow: 
                 0 12px 35px rgba(232, 67, 147, 0.4),
-                0 8px 25px rgba(0, 0, 0, 0.3);
+                0 8px 25px rgba(0, 0, 0, 0.3) !important;
         }
 
-        .photo-frame img {
+        .memory-wall .photo-frame img {
             width: 100% !important;
             height: 100% !important;
             object-fit: cover !important;
