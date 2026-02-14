@@ -3,11 +3,11 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/index.html"
+      "destination": "/valentines-day.html"
     },
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "/valentines-day.html"
     }
   ]
 }
