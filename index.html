@@ -15,11 +15,11 @@
             font-family: 'Georgia', serif;
             min-height: 100vh;
             background: linear-gradient(135deg, 
-                #fef7f0 0%, 
-                #f8e8d8 25%, 
-                #f0d4c7 50%, 
-                #e8c1b0 75%, 
-                #deb3a3 100%);
+                #e8f4f8 0%, 
+                #d1e9f0 25%, 
+                #b8dde8 50%, 
+                #9fd1e0 75%, 
+                #86c5d8 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,11 +28,11 @@
             overflow-x: hidden;
         }
 
-        /* Floating hearts background animation */
+        /* Floating elements background animation */
         .floating-element {
             position: absolute;
-            color: rgba(222, 179, 163, 0.4);
-            font-size: 18px;
+            color: rgba(134, 197, 216, 0.5);
+            font-size: 20px;
             animation: float 8s ease-in-out infinite;
             pointer-events: none;
         }
@@ -52,30 +52,31 @@
                 transform: translateY(100vh) rotate(0deg);
                 opacity: 0;
             }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
             50% { 
                 transform: translateY(-20px) rotate(180deg);
-                opacity: 0.3;
+                opacity: 0.4;
             }
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 25px;
-            padding: 3rem 2.5rem;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 3.5rem 3rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
             text-align: center;
-            max-width: 500px;
+            max-width: 550px;
             width: 90%;
             position: relative;
             transform: scale(0.9);
             animation: slideIn 0.8s ease-out forwards;
-            min-height: 400px;
+            min-height: 450px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            border: 1px solid rgba(134, 197, 216, 0.3);
         }
 
         @keyframes slideIn {
@@ -105,122 +106,163 @@
         }
 
         .title {
-            font-size: 2.2rem;
-            color: #8b4513;
+            font-size: 2.4rem;
+            color: #2c5f71;
             margin-bottom: 1.5rem;
-            font-weight: 600;
+            font-weight: 700;
             line-height: 1.3;
+            text-shadow: 0 2px 4px rgba(44, 95, 113, 0.2);
         }
 
         .subtitle {
-            font-size: 1.2rem;
-            color: #a0522d;
+            font-size: 1.3rem;
+            color: #4a7c8a;
             margin-bottom: 2rem;
             line-height: 1.5;
             font-weight: 400;
         }
 
         .round-title {
-            font-size: 1.6rem;
-            color: #8b4513;
+            font-size: 1.7rem;
+            color: #2c5f71;
             margin-bottom: 2rem;
             font-weight: 600;
+            text-shadow: 0 1px 2px rgba(44, 95, 113, 0.1);
         }
 
         .progress-indicator {
-            font-size: 0.9rem;
-            color: #cd853f;
+            font-size: 1rem;
+            color: #5d8a96;
             margin-bottom: 1.5rem;
-            font-weight: 500;
+            font-weight: 600;
+            background: linear-gradient(45deg, #86c5d8, #9fd1e0);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: white;
+            display: inline-block;
         }
 
         .question {
-            font-size: 1.3rem;
-            color: #8b4513;
+            font-size: 1.4rem;
+            color: #2c5f71;
             margin-bottom: 2rem;
-            font-weight: 500;
+            font-weight: 600;
             line-height: 1.4;
         }
 
         .options {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.2rem;
             margin-bottom: 2rem;
         }
 
         .option {
-            background: linear-gradient(45deg, #f4e4d6, #e8c1b0);
-            border: 2px solid transparent;
-            padding: 1rem 1.5rem;
-            border-radius: 15px;
+            background: linear-gradient(45deg, #f0f8fa, #e1f1f5);
+            border: 2px solid rgba(134, 197, 216, 0.3);
+            padding: 1.2rem 1.8rem;
+            border-radius: 20px;
             font-size: 1.1rem;
-            color: #8b4513;
+            color: #2c5f71;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             font-weight: 500;
             text-align: center;
+            box-shadow: 0 4px 15px rgba(134, 197, 216, 0.2);
         }
 
         .option:hover {
-            background: linear-gradient(45deg, #e8c1b0, #deb3a3);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.2);
+            background: linear-gradient(45deg, #d1e9f0, #b8dde8);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(44, 95, 113, 0.3);
+            border-color: #86c5d8;
         }
 
         .option.selected {
-            background: linear-gradient(45deg, #d2b48c, #cd853f);
-            border-color: #8b4513;
+            background: linear-gradient(45deg, #86c5d8, #5d8a96);
+            border-color: #2c5f71;
             color: white;
-            font-weight: 600;
+            font-weight: 700;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 95, 113, 0.4);
         }
 
         .btn {
-            padding: 1rem 2.5rem;
+            padding: 1.2rem 3rem;
             border: none;
             border-radius: 50px;
             font-size: 1.2rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(134, 197, 216, 0.3);
             margin: 0.5rem;
-            background: linear-gradient(45deg, #deb3a3, #cd853f);
+            background: linear-gradient(45deg, #86c5d8, #5d8a96);
             color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .btn:hover {
-            background: linear-gradient(45deg, #cd853f, #8b4513);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(139, 69, 19, 0.3);
+            background: linear-gradient(45deg, #5d8a96, #2c5f71);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(44, 95, 113, 0.4);
         }
 
         .btn:disabled {
-            background: #ccc;
+            background: linear-gradient(45deg, #ccc, #aaa);
             cursor: not-allowed;
             transform: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .results-container {
             text-align: center;
         }
 
-        .score-item {
-            background: rgba(222, 179, 163, 0.3);
-            padding: 1rem;
+        .score-heart {
+            font-size: 4rem;
+            color: #e74c3c;
             margin: 1rem 0;
-            border-radius: 15px;
-            font-size: 1.1rem;
-            color: #8b4513;
-            font-weight: 500;
+            position: relative;
+            display: inline-block;
+            animation: heartPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .score-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .score-item {
+            background: linear-gradient(45deg, rgba(134, 197, 216, 0.3), rgba(159, 209, 224, 0.2));
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            color: #2c5f71;
+            font-weight: 600;
+            border: 1px solid rgba(134, 197, 216, 0.4);
+            box-shadow: 0 4px 15px rgba(134, 197, 216, 0.2);
         }
 
         .final-message {
-            font-size: 1.3rem;
-            color: #8b4513;
-            margin: 1.5rem 0;
-            font-weight: 600;
+            font-size: 1.4rem;
+            color: #2c5f71;
+            margin: 2rem 0;
+            font-weight: 700;
             line-height: 1.4;
+            text-shadow: 0 1px 2px rgba(44, 95, 113, 0.1);
         }
 
         .closing-screen {
@@ -242,25 +284,26 @@
         }
 
         .closing-title {
-            font-size: 1.8rem;
-            color: #8b4513;
+            font-size: 2rem;
+            color: #2c5f71;
             margin-bottom: 1.5rem;
-            font-weight: 600;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(44, 95, 113, 0.2);
         }
 
         .closing-message {
-            font-size: 1.2rem;
-            color: #a0522d;
-            margin: 1rem 0;
+            font-size: 1.3rem;
+            color: #4a7c8a;
+            margin: 1.2rem 0;
             line-height: 1.5;
         }
 
         .final-blessing {
-            font-size: 1.4rem;
-            color: #8b4513;
+            font-size: 1.5rem;
+            color: #2c5f71;
             margin-top: 2rem;
-            font-weight: 600;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(44, 95, 113, 0.2);
         }
 
         /* Mobile responsiveness */
@@ -293,28 +336,28 @@
 </head>
 <body>
     <!-- Floating background elements -->
-    <div class="floating-element" style="left: 10%; animation-delay: 0s;">💛</div>
-    <div class="floating-element" style="left: 20%; animation-delay: -2s;">🌸</div>
-    <div class="floating-element" style="left: 30%; animation-delay: -4s;">💛</div>
+    <div class="floating-element" style="left: 10%; animation-delay: 0s;">✨</div>
+    <div class="floating-element" style="left: 20%; animation-delay: -2s;">�</div>
+    <div class="floating-element" style="left: 30%; animation-delay: -4s;">✨</div>
     <div class="floating-element" style="left: 40%; animation-delay: -6s;">👩‍👧</div>
-    <div class="floating-element" style="left: 50%; animation-delay: -8s;">💛</div>
-    <div class="floating-element" style="left: 60%; animation-delay: -10s;">🌸</div>
-    <div class="floating-element" style="left: 70%; animation-delay: -12s;">💛</div>
+    <div class="floating-element" style="left: 50%; animation-delay: -8s;">✨</div>
+    <div class="floating-element" style="left: 60%; animation-delay: -10s;">�</div>
+    <div class="floating-element" style="left: 70%; animation-delay: -12s;">✨</div>
     <div class="floating-element" style="left: 80%; animation-delay: -14s;">👩‍👧</div>
-    <div class="floating-element" style="left: 90%; animation-delay: -16s;">💛</div>
+    <div class="floating-element" style="left: 90%; animation-delay: -16s;">✨</div>
 
     <div class="container">
         <!-- Welcome Screen -->
         <div class="screen active" id="welcomeScreen">
             <div class="title">How Well Do You Know Each Other? 👩‍👧</div>
             <div class="subtitle">Let's see how well you understand each other.</div>
-            <button class="btn" onclick="startGame()">Start 💛</button>
+            <button class="btn" onclick="startGame()">Start ✨</button>
         </div>
 
-        <!-- Round 1: Daughter about Mom -->
+        <!-- Round 1: Akshara about Mom -->
         <div class="screen" id="round1Screen">
             <div class="progress-indicator">Step 1 of 4</div>
-            <div class="round-title">Round 1: Daughter answers about Mom</div>
+            <div class="round-title">Round 1: Akshara answers about Mom</div>
             <div class="question" id="round1Question"></div>
             <div class="options" id="round1Options"></div>
             <button class="btn" id="round1Next" onclick="nextRound1Question()" disabled>Next</button>
@@ -329,19 +372,19 @@
             <button class="btn" id="round2Next" onclick="nextRound2Question()" disabled>Next</button>
         </div>
 
-        <!-- Round 3: Mom about Daughter -->
+        <!-- Round 3: Mom about Akshara -->
         <div class="screen" id="round3Screen">
             <div class="progress-indicator">Step 3 of 4</div>
-            <div class="round-title">Round 2: Mom answers about Daughter</div>
+            <div class="round-title">Round 2: Mom answers about Akshara</div>
             <div class="question" id="round3Question"></div>
             <div class="options" id="round3Options"></div>
             <button class="btn" id="round3Next" onclick="nextRound3Question()" disabled>Next</button>
         </div>
 
-        <!-- Round 4: Daughter about herself -->
+        <!-- Round 4: Akshara about herself -->
         <div class="screen" id="round4Screen">
             <div class="progress-indicator">Step 4 of 4</div>
-            <div class="round-title">Now Daughter answers the same questions about herself</div>
+            <div class="round-title">Now Akshara answers the same questions about herself</div>
             <div class="question" id="round4Question"></div>
             <div class="options" id="round4Options"></div>
             <button class="btn" id="round4Next" onclick="nextRound4Question()" disabled>Next</button>
@@ -350,9 +393,13 @@
         <!-- Results Screen -->
         <div class="screen" id="resultsScreen">
             <div class="results-container">
-                <div class="title">Your Results 💛</div>
+                <div class="title">Your Results ✨</div>
+                <div class="score-heart">
+                    ❤️
+                    <div class="score-number" id="totalScore">0</div>
+                </div>
                 <div class="score-item" id="momScore"></div>
-                <div class="score-item" id="daughterScore"></div>
+                <div class="score-item" id="aksharaScore"></div>
                 <div class="final-message" id="overallMessage"></div>
                 <button class="btn" onclick="showClosing()">Continue</button>
             </div>
@@ -363,8 +410,8 @@
             <div class="closing-screen">
                 <div class="closing-title">No matter the score…</div>
                 <div class="closing-message">You both mean more to each other than you realize.</div>
-                <div class="closing-message">Mom & Daughter bonds are special.</div>
-                <div class="final-blessing">Lucky to have each other 💛</div>
+                <div class="closing-message">Mom & Akshara bonds are special.</div>
+                <div class="final-blessing">Lucky to have each other ✨</div>
             </div>
         </div>
     </div>
@@ -390,7 +437,7 @@
             }
         ];
 
-        const daughterQuestions = [
+        const aksharaQuestions = [
             {
                 question: "What makes her happiest?",
                 options: ["Appreciation", "Friends", "Peaceful time", "Achievements"]
@@ -411,10 +458,10 @@
 
         // Game state
         let currentQuestionIndex = 0;
-        let daughterAboutMom = [];
+        let aksharaAboutMom = [];
         let momAboutHerself = [];
-        let momAboutDaughter = [];
-        let daughterAboutHerself = [];
+        let momAboutAkshara = [];
+        let aksharaAboutHerself = [];
 
         function startGame() {
             showScreen('round1Screen');
@@ -439,7 +486,7 @@
 
         function selectRound1Answer(answerIndex, element) {
             selectAnswer(element, 'round1Options');
-            daughterAboutMom[currentQuestionIndex] = answerIndex;
+            aksharaAboutMom[currentQuestionIndex] = answerIndex;
             document.getElementById('round1Next').disabled = false;
         }
 
@@ -451,13 +498,13 @@
 
         function selectRound3Answer(answerIndex, element) {
             selectAnswer(element, 'round3Options');
-            momAboutDaughter[currentQuestionIndex] = answerIndex;
+            momAboutAkshara[currentQuestionIndex] = answerIndex;
             document.getElementById('round3Next').disabled = false;
         }
 
         function selectRound4Answer(answerIndex, element) {
             selectAnswer(element, 'round4Options');
-            daughterAboutHerself[currentQuestionIndex] = answerIndex;
+            aksharaAboutHerself[currentQuestionIndex] = answerIndex;
             document.getElementById('round4Next').disabled = false;
         }
 
@@ -497,20 +544,20 @@
 
         function nextRound3Question() {
             currentQuestionIndex++;
-            if (currentQuestionIndex < daughterQuestions.length) {
-                displayQuestion('round3', daughterQuestions, 'round3Question', 'round3Options', selectRound3Answer);
+            if (currentQuestionIndex < aksharaQuestions.length) {
+                displayQuestion('round3', aksharaQuestions, 'round3Question', 'round3Options', selectRound3Answer);
                 document.getElementById('round3Next').disabled = true;
             } else {
                 currentQuestionIndex = 0;
                 showScreen('round4Screen');
-                displayQuestion('round4', daughterQuestions, 'round4Question', 'round4Options', selectRound4Answer);
+                displayQuestion('round4', aksharaQuestions, 'round4Question', 'round4Options', selectRound4Answer);
             }
         }
 
         function nextRound4Question() {
             currentQuestionIndex++;
-            if (currentQuestionIndex < daughterQuestions.length) {
-                displayQuestion('round4', daughterQuestions, 'round4Question', 'round4Options', selectRound4Answer);
+            if (currentQuestionIndex < aksharaQuestions.length) {
+                displayQuestion('round4', aksharaQuestions, 'round4Question', 'round4Options', selectRound4Answer);
                 document.getElementById('round4Next').disabled = true;
             } else {
                 showResults();
@@ -520,27 +567,29 @@
         function showResults() {
             // Calculate scores
             let momMatches = 0;
-            let daughterMatches = 0;
+            let aksharaMatches = 0;
 
-            // Compare daughter's answers about mom vs mom's answers about herself
+            // Compare Akshara's answers about mom vs mom's answers about herself
             for (let i = 0; i < momQuestions.length; i++) {
-                if (daughterAboutMom[i] === momAboutHerself[i]) {
+                if (aksharaAboutMom[i] === momAboutHerself[i]) {
                     momMatches++;
                 }
             }
 
-            // Compare mom's answers about daughter vs daughter's answers about herself
-            for (let i = 0; i < daughterQuestions.length; i++) {
-                if (momAboutDaughter[i] === daughterAboutHerself[i]) {
-                    daughterMatches++;
+            // Compare mom's answers about Akshara vs Akshara's answers about herself
+            for (let i = 0; i < aksharaQuestions.length; i++) {
+                if (momAboutAkshara[i] === aksharaAboutHerself[i]) {
+                    aksharaMatches++;
                 }
             }
 
-            // Display results
-            document.getElementById('momScore').textContent = `You matched ${momMatches} out of 4 for Mom 💛`;
-            document.getElementById('daughterScore').textContent = `You matched ${daughterMatches} out of 4 for Daughter 💛`;
+            const totalScore = momMatches + aksharaMatches;
 
-            const totalScore = momMatches + daughterMatches;
+            // Display results
+            document.getElementById('totalScore').textContent = totalScore + '/8';
+            document.getElementById('momScore').textContent = `You matched ${momMatches} out of 4 for Mom ✨`;
+            document.getElementById('aksharaScore').textContent = `You matched ${aksharaMatches} out of 4 for Akshara ✨`;
+
             let message = "";
 
             if (totalScore >= 6) {
