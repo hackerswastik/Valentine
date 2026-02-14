@@ -1,4 +1,4 @@
-# 💕 Valentine's Day Website for Nivedita
+# 💕 Valentine's Day Website 
 
 A beautiful, interactive Valentine's Day website with playful animations and romantic design.
 
