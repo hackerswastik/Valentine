@@ -761,30 +761,26 @@
             const textElement = document.getElementById('typewriterText');
             textElement.innerHTML = '';
             let index = 0;
+            let currentText = '';
             
             function typeChar() {
                 if (index < message.length) {
                     if (message[index] === '\n') {
-                        textElement.innerHTML += '<br>';
+                        currentText += '<br>';
                     } else {
-                        textElement.innerHTML += message[index];
+                        currentText += message[index];
                     }
                     index++;
                     
-                    // Add cursor
-                    textElement.innerHTML += '<span class="cursor">|</span>';
+                    // Display text with cursor
+                    textElement.innerHTML = currentText + '<span class="cursor">|</span>';
                     
-                    setTimeout(() => {
-                        // Remove cursor before next character
-                        textElement.innerHTML = textElement.innerHTML.slice(0, -28);
-                        
-                        // Pause longer after sentences
-                        const delay = (message[index - 1] === '.' || message[index - 1] === '…') ? 800 : 50;
-                        setTimeout(typeChar, delay);
-                    }, 50);
+                    // Pause longer after sentences
+                    const delay = (message[index - 1] === '.' || message[index - 1] === '…') ? 800 : 80;
+                    setTimeout(typeChar, delay);
                 } else {
                     // Keep final cursor blinking
-                    textElement.innerHTML += '<span class="cursor">|</span>';
+                    textElement.innerHTML = currentText + '<span class="cursor">|</span>';
                     if (callback) callback();
                 }
             }
